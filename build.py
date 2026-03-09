@@ -39,11 +39,11 @@ SOCIAL_ICONS_HTML = """
   <a href="https://github.com/antonytuff" target="_blank" title="GitHub">
     <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
   </a>
-  <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+  <a href="https://linkedin.com/in/anthony-mabi-9bb18b174" target="_blank" title="LinkedIn">
     <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
   </a>
-  <a href="https://twitter.com/yourhandle" target="_blank" title="X / Twitter">
-    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <a href="mailto:inert.fingers-0m@icloud.com" title="Email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
   </a>
 </div>
 """
@@ -618,20 +618,17 @@ def build_index(blog_posts, writeup_posts):
         <a href="https://github.com/antonytuff" target="_blank" title="GitHub">
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+        <a href="https://linkedin.com/in/anthony-mabi-9bb18b174" target="_blank" title="LinkedIn">
           <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
-        <a href="https://twitter.com/yourhandle" target="_blank" title="X / Twitter">
-          <svg viewBox="0 0 24 24"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="mailto:you@example.com" title="Email">
+        <a href="mailto:inert.fingers-0m@icloud.com" title="Email">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         </a>
       </div>
     </div>
 
     <div class="about-section reveal">
-      <p>Cybersecurity enthusiast and penetration tester with a passion for breaking things (ethically) and writing about it. Specialized in web application security, network pentesting, and CTF competitions. This is where I document my journey through the offensive security landscape.</p>
+      <p>Experienced Offensive Security Operator & Cybersecurity Expert with over 5 years of experience. Specialized in red teaming, advanced penetration testing, cloud security, network exploitation, mobile security, and information security assessments. Always keen to learn, research, and share knowledge with others.</p>
       <div class="about-stats">
         <div class="stat-box">
           <span class="stat-num">{len(writeup_posts)}</span>
@@ -730,25 +727,18 @@ def build_contact():
                 <span class="method-value">antonytuff</span>
               </div>
             </a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-method">
+            <a href="https://linkedin.com/in/anthony-mabi-9bb18b174" target="_blank" class="contact-method">
               <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               <div>
                 <span class="method-label">LinkedIn</span>
-                <span class="method-value">yourprofile</span>
+                <span class="method-value">anthony-mabi</span>
               </div>
             </a>
-            <a href="https://twitter.com/yourhandle" target="_blank" class="contact-method">
-              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              <div>
-                <span class="method-label">X / Twitter</span>
-                <span class="method-value">@yourhandle</span>
-              </div>
-            </a>
-            <a href="mailto:you@example.com" class="contact-method">
+            <a href="mailto:inert.fingers-0m@icloud.com" class="contact-method">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               <div>
                 <span class="method-label">Email</span>
-                <span class="method-value">you@example.com</span>
+                <span class="method-value">inert.fingers-0m@icloud.com</span>
               </div>
             </a>
           </div>
@@ -783,6 +773,11 @@ def build():
 
     if STATIC.exists():
         shutil.copytree(STATIC, OUTPUT / "static")
+
+    # Copy CNAME to output root for GitHub Pages custom domain
+    cname = STATIC / "CNAME"
+    if cname.exists():
+        shutil.copy(cname, OUTPUT / "CNAME")
 
     # Pass 1: collect metadata from all posts (no sidebar yet)
     blog_posts = []

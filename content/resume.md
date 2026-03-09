@@ -1,21 +1,25 @@
 ---
 title: Resume
-description: Cybersecurity professional - penetration tester and security researcher.
+description: Offensive Security Operator & Cybersecurity Expert
 cv_download: static/AnthonyTuff_CV.pdf
 ---
 
 ## whoami
 
-Cybersecurity enthusiast and penetration tester with a passion for breaking things (ethically) and writing about it. Experienced in web application security, network penetration testing, and CTF competitions.
+Experienced Offensive Security Operator & Cybersecurity Expert with over 5 years of experience and a demonstrated history of working across diverse sectors. Specialized in red teaming, advanced penetration testing, Cyber Attack Simulation Testing, cloud security, security trainings, network exploitation, mobile security, and information security assessments.
+
+Always keen to learn new things, security research, mentorship, and sharing knowledge with others. Lover of all things malware analysis, Red Teaming, DFIR & Mobile Security.
 
 ## skills
 
-- **Offensive Security**: Penetration Testing, Red Teaming, Social Engineering
-- **Web Security**: OWASP Top 10, Burp Suite, SQLMap, XSS/CSRF/SSRF
-- **Network Security**: Nmap, Wireshark, Metasploit, Pivoting
-- **Programming**: Python, Bash, Go, JavaScript
-- **Cloud**: AWS Security, Docker, Kubernetes
-- **OS**: Linux (Kali, Ubuntu, Arch), Windows Server
+- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Social Engineering
+- **Web & Application Security**: OWASP Top 10, Burp Suite, SQLMap, API Security Testing
+- **Network Security**: Nmap, Wireshark, Metasploit, Pivoting, Network Exploitation
+- **Cloud Security**: AWS Security, Azure, Docker, Kubernetes
+- **Mobile Security**: Android/iOS Pentesting, APK Reverse Engineering
+- **Programming**: Python, Bash, Go, JavaScript, PowerShell
+- **DFIR**: Malware Analysis, Incident Response, Digital Forensics
+- **OS**: Linux (Kali, Ubuntu, Arch), Windows Server, Active Directory
 
 ## certifications
 
@@ -25,32 +29,35 @@ Cybersecurity enthusiast and penetration tester with a passion for breaking thin
 
 ## experience
 
-### Security Consultant | Acme Security Corp
-*2024 - Present*
+### Offensive Security Operator
+*2020 - Present*
 
-- Conducted penetration tests for Fortune 500 clients
-- Discovered critical vulnerabilities in web applications
-- Authored detailed reports with remediation guidance
+- Conducted advanced penetration tests and red team engagements across diverse sectors
+- Performed Cyber Attack Simulation Testing (CAST) for enterprise clients
+- Led cloud security assessments and mobile application security reviews
+- Authored detailed technical reports with actionable remediation guidance
+- Mentored junior security analysts and delivered security training sessions
 
-### SOC Analyst | DefendCo
-*2022 - 2024*
+### Security Consultant
+*2018 - 2020*
 
-- Monitored and triaged security alerts
+- Performed network and web application penetration testing
+- Conducted security assessments and vulnerability analysis
+- Developed and implemented security policies and procedures
 - Performed incident response and forensic analysis
-- Developed detection rules and automated responses
 
 ## achievements
 
 - HackTheBox Pro Hacker rank
-- Top 10% on TryHackMe
 - Multiple CTF competition podiums
+- Active security researcher and blogger at sploitony.com
 
 ## education
 
-**B.S. Computer Science** -- State University, 2022
+**B.S. Computer Science**
 
 ## links
 
 - GitHub: [antonytuff](https://github.com/antonytuff)
-- LinkedIn: [yourprofile](https://linkedin.com/in/yourprofile)
-- Email: you@example.com
+- LinkedIn: [anthony-mabi](https://linkedin.com/in/anthony-mabi-9bb18b174)
+- Email: inert.fingers-0m@icloud.com
