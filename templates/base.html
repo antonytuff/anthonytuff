@@ -459,6 +459,15 @@
     updateActive();
   })();
 
+  // ===== TOC TOGGLE =====
+  (function() {
+    var tocTitle = document.querySelector('.toc-title');
+    if (!tocTitle) return;
+    tocTitle.addEventListener('click', function() {
+      tocTitle.closest('.toc').classList.toggle('collapsed');
+    });
+  })();
+
   // ===== CONTACT FORM =====
   (function() {
     var form = document.getElementById('contact-form');

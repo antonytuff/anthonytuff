@@ -914,9 +914,12 @@ main { padding: 3rem 0; }
 .article-content li { margin-bottom: 0.4rem; }
 
 .article-content img {
+  display: block;
   max-width: 100%;
+  height: auto;
   border: 1px solid var(--border);
-  margin: 1rem 0;
+  margin: 1.5rem 0;
+  clear: both;
 }
 
 .article-content table {
@@ -1288,15 +1291,22 @@ main { padding: 3rem 0; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-left: 3px solid var(--cyan);
+  overflow: hidden;
+  clear: both;
 }
 
 .toc-title {
   font-family: 'Share Tech Mono', monospace;
   color: var(--cyan);
   font-size: 0.85rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0;
   padding-bottom: 0.5rem;
   border-bottom: 1px dashed var(--border);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
 }
 
 .toc-title::before {
@@ -1304,9 +1314,41 @@ main { padding: 3rem 0; }
   color: var(--green);
 }
 
+.toc-title::after {
+  content: '[-]';
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.toc.collapsed .toc-title::after {
+  content: '[+]';
+}
+
 .toc-nav {
   display: flex;
   flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 0.8rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.toc-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.toc.collapsed .toc-nav {
+  display: none;
 }
 
 .toc-link {
