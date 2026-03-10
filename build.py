@@ -419,15 +419,16 @@ def build_resume():
     certs_html = ""
     if 'certifications' in sections:
         badge_map = {
-            'oscp': ('OSCP', 'Offensive Security', 'oscp', 'static/badge-oscp.png'),
             'ceh': ('CEH', 'EC-Council', 'ceh', 'static/badge-ceh.png'),
             'ewptx': ('eWPTX', 'eLearnSecurity', 'ewptx', 'static/badge-ewptx.png'),
             'crte': ('CRTE', 'Altered Security', 'crte', 'static/badge-crte.png'),
             'crto': ('CRTO', 'Zero Point Security', 'crto', 'static/badge-crto.png'),
             'ctia': ('CTIA', 'EC-Council', 'ctia', 'static/badge-ctia.png'),
             'cnss': ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.png'),
-            'security+': ('Sec+', 'CompTIA', 'secplus', 'static/badge-secplus.png'),
-            'comptia': ('Sec+', 'CompTIA', 'secplus', 'static/badge-secplus.png'),
+            'iso 22301': ('CLI', 'Datasec', 'cli', 'static/badge-cli.png'),
+            'cscu': ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png'),
+            'cei': ('CEI', 'EC-Council', 'cei', 'static/badge-cei.png'),
+            'ccna': ('CCNA', 'Cisco', 'ccna', 'static/badge-ccna.png'),
         }
         badges = []
         for line in sections['certifications'].strip().split('\n'):
