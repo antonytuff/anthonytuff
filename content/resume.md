@@ -28,11 +28,12 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 ## certifications
 
 - CEH v10 (Certified Ethical Hacker) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
-- CEH Practical & Master - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
-- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity | https://verified.elearnsecurity.com/verify/XXXXX
+- CEH Practical & Master - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=KnNhdPoEkCdZXvoHgmjTBcCbkAoHleh/TVfOjarRJNM=
+- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity | https://verified.elearnsecurity.com/certificates/04e92ddf-a2be-4ca8-ae4b-bc909ab2947e
 - CRTE (Certified Red Team Expert) - Altered Security | https://www.youracclaim.com/verify/XXXXX
-- CRTO (Certified Red Team Operator) - Zero Point Security | https://eu.badgr.com/verify/XXXXX
+- CRTO (Certified Red Team Operator) - Zero Point Security | https://certs.zeropointsecurity.co.uk/4bcd592b-16a6-4ced-ab71-bcd0eab781dc#acc.fkqCdUWz
 - CTIA (Certified Threat Intelligence Analyst) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- CSA (Certified SOC Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=6GtvaQdY0D8klMbqkhjurSFr1Hu5KPTzXwguosGs1ts=
 - CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.icsi.co.uk/verify/XXXXX
 - CLI (Certified Lead Implementer ISO 22301) - Datasec | https://www.credly.com/verify/XXXXX
 - CSCU v2 (Certified Secure Computer User) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
@@ -67,11 +68,11 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 ### Independent Information Security Consultant
 *2018 - 2022*
 
-- **ICDC** (Sep-Oct 2021): Conducted Information Systems Audit reviewing IT Risk, Business Application Reviews, Networks, Databases, and Operating Systems
+- **Confidential** (Sep-Oct 2021): Conducted Information Systems Audit reviewing IT Risk, Business Application Reviews, Networks, Databases, and Operating Systems
 - **Toolkit Iskills LTD** (Jan-Feb 2021): Developed ICT policy defining rules, procedures, and guidelines for IT asset usage and maintenance
-- **Meru County Government** (Jun-Jul 2019): Conducted ICT Audit evaluating systems, processes, and procedures; prepared 5-year roadmap report
+- **Confidential** (Jun-Jul 2019): Conducted ICT Audit evaluating systems, processes, and procedures; prepared 5-year roadmap report
 - **NACC** (Jan-Feb 2019): Performed penetration testing and system audit to analyze potential threats and ensure IT system security
-- **Britam Insurance** (Sep-Dec 2017): Conducted network security assessment across 8 countries using Nessus, Nexpose, and Metasploit
+- **Confidential** (Sep-Dec 2017): Conducted network security assessment across 8 countries using Nessus, Nexpose, and Metasploit
 
 ### Web Developer & Designer — Impress Creations Ltd
 *Jan 2018 - Dec 2020 (Part-time)*
