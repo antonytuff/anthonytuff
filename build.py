@@ -434,6 +434,10 @@ def build_resume():
             line = line.strip()
             if line.startswith('- '):
                 cert_text = line[2:].strip()
+                verify_url = ''
+                if ' | ' in cert_text:
+                    cert_text, verify_url = cert_text.rsplit(' | ', 1)
+                    verify_url = verify_url.strip()
                 icon_cls = 'default'
                 short = cert_text[:4]
                 issuer = ''
@@ -449,12 +453,14 @@ def build_resume():
                     icon_html = f'<img src="{badge_img}" alt="{short}" class="badge-img">'
                 else:
                     icon_html = f'<div class="badge-icon {icon_cls}">{short}</div>'
+                verify_html = f'<a href="{verify_url}" target="_blank" class="badge-verify">Verify</a>' if verify_url else ''
                 badges.append(f"""
                 <div class="badge">
                   {icon_html}
                   <div class="badge-info">
                     <span class="badge-name">{cert_text}</span>
                     {f'<span class="badge-issuer">{issuer}</span>' if issuer else ''}
+                    {verify_html}
                   </div>
                 </div>""")
         certs_html = f"""

@@ -23,15 +23,15 @@ Always keen to learn new things, security research, mentorship, and sharing know
 
 ## certifications
 
-- OSCP (Offensive Security Certified Professional)
-- CEH v10 (Certified Ethical Hacker) - EC-Council
-- CEH Practical & Master - EC-Council
-- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity
-- CRTE (Certified Red Team Expert) - Altered Security
-- CRTO (Certified Red Team Operator) - Zero Point Security
-- CTIA (Certified Threat Intelligence Analyst) - EC-Council
-- CNSS (Certified Network Security Specialist) - ICSI, UK
-- CompTIA Security+
+- OSCP (Offensive Security Certified Professional) | https://www.credential.net/verify/OSCP-XXXXX
+- CEH v10 (Certified Ethical Hacker) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- CEH Practical & Master - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity | https://verified.elearnsecurity.com/verify/XXXXX
+- CRTE (Certified Red Team Expert) - Altered Security | https://www.youracclaim.com/verify/XXXXX
+- CRTO (Certified Red Team Operator) - Zero Point Security | https://eu.badgr.com/verify/XXXXX
+- CTIA (Certified Threat Intelligence Analyst) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.icsi.co.uk/verify/XXXXX
+- CompTIA Security+ | https://www.credly.com/verify/XXXXX
 
 ## experience
 

@@ -1075,6 +1075,20 @@ main { padding: 3rem 0; }
   color: var(--text-dim);
 }
 
+.badge .badge-verify {
+  font-size: 0.6rem;
+  color: var(--green);
+  text-decoration: none;
+  margin-top: 2px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.badge .badge-verify:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 /* Resume sections with unique icons */
 .resume-block {
   margin-bottom: 2.5rem;
