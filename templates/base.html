@@ -264,45 +264,124 @@
     if (saved) document.documentElement.setAttribute('data-theme', saved);
   })();
 
-  // ===== MATRIX RAIN =====
+  // ===== PARTICLE NETWORK =====
   (function() {
     const canvas = document.getElementById('matrix-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    let w, h, particles, mouse = { x: -999, y: -999 };
+    const CONNECT_DIST = 150;
+    const MOUSE_DIST = 200;
+    const PARTICLE_COUNT = Math.min(80, Math.floor(window.innerWidth * window.innerHeight / 15000));
 
     function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
     }
-    resize();
-    window.addEventListener('resize', resize);
 
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]|;:<>?/~`abcdefghijklmnopqrstuvwxyz';
-    const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
-    let drops = Array(columns).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(10, 14, 20, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#00ff41';
-      ctx.font = fontSize + 'px Fira Code';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+    class Particle {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 1.5 + 0.5;
+        // Assign color: mostly green, some cyan, rare purple
+        const roll = Math.random();
+        if (roll < 0.6) { this.color = '0, 255, 65'; }
+        else if (roll < 0.85) { this.color = '0, 212, 255'; }
+        else { this.color = '180, 77, 255'; }
+        this.baseAlpha = Math.random() * 0.5 + 0.3;
+        this.pulseSpeed = Math.random() * 0.02 + 0.005;
+        this.pulseOffset = Math.random() * Math.PI * 2;
+      }
+      update(t) {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > w) this.vx *= -1;
+        if (this.y < 0 || this.y > h) this.vy *= -1;
+        // Subtle mouse repulsion
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_DIST && dist > 0) {
+          const force = (MOUSE_DIST - dist) / MOUSE_DIST * 0.02;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
         }
-        drops[i]++;
+        // Dampen velocity
+        this.vx *= 0.999;
+        this.vy *= 0.999;
+        this.alpha = this.baseAlpha + Math.sin(t * this.pulseSpeed + this.pulseOffset) * 0.15;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        ctx.fill();
       }
     }
 
-    setInterval(draw, 50);
+    function init() {
+      resize();
+      particles = [];
+      const count = Math.min(PARTICLE_COUNT, Math.floor(w * h / 15000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
 
-    window.addEventListener('resize', function() {
-      columns = Math.floor(canvas.width / fontSize);
-      drops = Array(columns).fill(1);
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      frame++;
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(frame);
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const opacity = (1 - dist / CONNECT_DIST) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 255, 65, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+
+        // Mouse connections
+        const mdx = particles[i].x - mouse.x;
+        const mdy = particles[i].y - mouse.y;
+        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mdist < MOUSE_DIST) {
+          const opacity = (1 - mdist / MOUSE_DIST) * 0.25;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    window.addEventListener('resize', init);
+    document.addEventListener('mousemove', function(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    document.addEventListener('mouseleave', function() {
+      mouse.x = -999;
+      mouse.y = -999;
     });
   })();
 
