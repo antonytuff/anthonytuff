@@ -421,6 +421,11 @@ def build_resume():
         badge_map = {
             'oscp': ('OSCP', 'Offensive Security', 'oscp', 'static/badge-oscp.png'),
             'ceh': ('CEH', 'EC-Council', 'ceh', 'static/badge-ceh.png'),
+            'ewptx': ('eWPTX', 'eLearnSecurity', 'ewptx', 'static/badge-ewptx.png'),
+            'crte': ('CRTE', 'Altered Security', 'crte', 'static/badge-crte.png'),
+            'crto': ('CRTO', 'Zero Point Security', 'crto', 'static/badge-crto.png'),
+            'ctia': ('CTIA', 'EC-Council', 'ctia', 'static/badge-ctia.png'),
+            'cnss': ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.png'),
             'security+': ('Sec+', 'CompTIA', 'secplus', 'static/badge-secplus.png'),
             'comptia': ('Sec+', 'CompTIA', 'secplus', 'static/badge-secplus.png'),
         }
@@ -440,7 +445,7 @@ def build_resume():
                         icon_cls = cls
                         badge_img = img
                         break
-                if badge_img:
+                if badge_img and (ROOT / badge_img).exists():
                     icon_html = f'<img src="{badge_img}" alt="{short}" class="badge-img">'
                 else:
                     icon_html = f'<div class="badge-icon {icon_cls}">{short}</div>'

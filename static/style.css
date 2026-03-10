@@ -1050,6 +1050,11 @@ main { padding: 3rem 0; }
 
 .badge .badge-icon.oscp { background: #e04040; color: #fff; }
 .badge .badge-icon.ceh { background: #c72c2c; color: #fff; }
+.badge .badge-icon.ewptx { background: #ff6b00; color: #fff; }
+.badge .badge-icon.crte { background: #8b00ff; color: #fff; }
+.badge .badge-icon.crto { background: #dc143c; color: #fff; }
+.badge .badge-icon.ctia { background: #1a1a2e; color: #00d4ff; }
+.badge .badge-icon.cnss { background: #004d99; color: #fff; }
 .badge .badge-icon.secplus { background: #0073e6; color: #fff; }
 .badge .badge-icon.default { background: var(--green-dim); color: var(--bg); }
 

@@ -24,7 +24,13 @@ Always keen to learn new things, security research, mentorship, and sharing know
 ## certifications
 
 - OSCP (Offensive Security Certified Professional)
-- CEH (Certified Ethical Hacker)
+- CEH v10 (Certified Ethical Hacker) - EC-Council
+- CEH Practical & Master - EC-Council
+- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity
+- CRTE (Certified Red Team Expert) - Altered Security
+- CRTO (Certified Red Team Operator) - Zero Point Security
+- CTIA (Certified Threat Intelligence Analyst) - EC-Council
+- CNSS (Certified Network Security Specialist) - ICSI, UK
 - CompTIA Security+
 
 ## experience
