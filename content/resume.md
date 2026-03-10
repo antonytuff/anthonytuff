@@ -14,8 +14,8 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 ## skills
 
-- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Social Engineering
-- **Web & Application Security**: OWASP Top 10, Burp Suite, API Security, DAST/SAST, Source Code Review
+- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Active Directory Exploitation, Social Engineering
+- **Web & API Security**: OWASP Top 10, Burp Suite, API Security Assessment, REST/GraphQL Testing, DAST/SAST, Source Code Review
 - **Network Security**: Nmap, Wireshark, Metasploit, Nexpose, Nessus, Network Exploitation
 - **Cloud Security**: AWS, Azure, GCP, Docker, Kubernetes, ScoutSuite, Pacu
 - **Mobile Security**: Android/iOS Pentesting (OWASP MSTG), APK Reverse Engineering
