@@ -640,7 +640,7 @@ def build_index(blog_posts, writeup_posts):
     </div>
 
     <div class="about-section reveal">
-      <p>Experienced Offensive Security Operator & Cybersecurity Expert with over 5 years of experience. Specialized in red teaming, advanced penetration testing, cloud security, network exploitation, mobile security, and information security assessments. Always keen to learn, research, and share knowledge with others.</p>
+      <p>Cybersecurity Engineer with 7+ years of experience across offensive security, DevSecOps, cloud security, and security automation. Specialized in red teaming, penetration testing, and building automated security tooling — with a growing focus on AI-driven security solutions and LLM security research. 200+ engagements delivered across enterprise, government, and financial sectors.</p>
       <div class="about-stats">
         <div class="stat-box">
           <span class="stat-num">{len(writeup_posts)}</span>
