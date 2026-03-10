@@ -41,7 +41,7 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 ## experience
 
-### Senior Security Engineer — Silensec Africa
+### Senior Security Engineer — Confidential
 *Dec 2024 - Present*
 
 - Conduct regular security assessments, code reviews, and penetration testing to identify vulnerabilities in applications and software
