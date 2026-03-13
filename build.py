@@ -643,198 +643,24 @@ def build_index(blog_posts, writeup_posts):
       <p>Cybersecurity Engineer with 7+ years of experience across offensive security, DevSecOps, cloud security, and security automation. Specialized in red teaming, penetration testing, and building automated security tooling — with a growing focus on AI-driven security solutions and LLM security research. 200+ engagements delivered across enterprise, government, and financial sectors.</p>
       <div class="about-stats">
         <div class="stat-box">
-          <span class="stat-num">200+</span>
-          <span class="stat-label">Engagements</span>
+          <span class="stat-num">{len(writeup_posts)}</span>
+          <span class="stat-label">Writeups</span>
         </div>
         <div class="stat-box">
-          <span class="stat-num">7+</span>
-          <span class="stat-label">Years Exp</span>
+          <span class="stat-num">{len(blog_posts)}</span>
+          <span class="stat-label">Articles</span>
         </div>
         <div class="stat-box">
-          <span class="stat-num">11</span>
-          <span class="stat-label">Certifications</span>
+          <span class="stat-num">{len(collect_used_tags(all_posts))}</span>
+          <span class="stat-label">Topics</span>
         </div>
         <div class="stat-box">
           <span class="stat-num">{len(all_posts)}</span>
-          <span class="stat-label">Posts</span>
+          <span class="stat-label">Total Posts</span>
         </div>
       </div>
     </div>
 
-    <!-- Certifications Section -->
-    <div class="section-header reveal">
-      <h1>[*] certifications</h1>
-      <p>Professional credentials and qualifications</p>
-    </div>
-    <div class="home-certs-grid reveal">
-      <div class="home-cert-card">
-        <img src="static/badge-ceh.png" alt="CEH" class="home-cert-img">
-        <div class="home-cert-info">
-          <span class="home-cert-name">CEH v10 + Practical & Master</span>
-          <span class="home-cert-issuer">EC-Council</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <img src="static/badge-oscp.png" alt="eWPTX" class="home-cert-img">
-        <div class="home-cert-info">
-          <span class="home-cert-name">eWPTXv2</span>
-          <span class="home-cert-issuer">eLearnSecurity</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <div class="home-cert-icon crte">CRTE</div>
-        <div class="home-cert-info">
-          <span class="home-cert-name">Certified Red Team Expert</span>
-          <span class="home-cert-issuer">Altered Security</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <div class="home-cert-icon crto">CRTO</div>
-        <div class="home-cert-info">
-          <span class="home-cert-name">Certified Red Team Operator</span>
-          <span class="home-cert-issuer">Zero Point Security</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <img src="static/badge-ctia.png" alt="CTIA" class="home-cert-img">
-        <div class="home-cert-info">
-          <span class="home-cert-name">CTIA</span>
-          <span class="home-cert-issuer">EC-Council</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <div class="home-cert-icon csa">CSA</div>
-        <div class="home-cert-info">
-          <span class="home-cert-name">Certified SOC Analyst</span>
-          <span class="home-cert-issuer">EC-Council</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <div class="home-cert-icon cnss">CNSS</div>
-        <div class="home-cert-info">
-          <span class="home-cert-name">Network Security Specialist</span>
-          <span class="home-cert-issuer">ICSI, UK</span>
-        </div>
-      </div>
-      <div class="home-cert-card">
-        <div class="home-cert-icon cei">CEI</div>
-        <div class="home-cert-info">
-          <span class="home-cert-name">Certified EC-Council Instructor</span>
-          <span class="home-cert-issuer">EC-Council</span>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:1rem;" class="reveal">
-      <a href="resume.html" style="color:var(--cyan);font-size:0.85rem;">View all certifications &rarr;</a>
-    </div>
-
-    <!-- Projects Section -->
-    <div class="section-header reveal">
-      <h1>[+] projects</h1>
-      <p>Current and featured work</p>
-    </div>
-    <div class="home-projects-grid reveal">
-      <a href="https://github.com/antonytuff/attack-surface-dashboard" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Python</span>
-        </div>
-        <h3>Attack Surface Dashboard</h3>
-        <p>AI-powered vulnerability management with multi-tenant architecture & scan parsers (Nmap, Burp, ZAP, Nessus, Nuclei, Shodan)</p>
-        <div class="home-project-tags">
-          <span class="tag">vuln-mgmt</span><span class="tag red-team">ai</span><span class="tag">automation</span>
-        </div>
-      </a>
-      <a href="https://github.com/antonytuff/threat-carver" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Python</span>
-        </div>
-        <h3>Threat Carver</h3>
-        <p>Threat intelligence tool leveraging MITRE ATT&CK for surgical precision in adversary tactics analysis</p>
-        <div class="home-project-tags">
-          <span class="tag">threat-intel</span><span class="tag">mitre</span>
-        </div>
-      </a>
-      <a href="https://github.com/antonytuff/MITRE_ATT-CK_Explorer" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Python</span>
-        </div>
-        <h3>MITRE ATT&CK Explorer</h3>
-        <p>Streamlit-based web app for exploring and analyzing the MITRE ATT&CK framework</p>
-        <div class="home-project-tags">
-          <span class="tag">mitre</span><span class="tag">streamlit</span>
-        </div>
-      </a>
-      <a href="https://github.com/antonytuff/Red-Team-Notes" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Markdown</span>
-        </div>
-        <h3>Red Team Notes</h3>
-        <p>OSCP guide and Red Team assessment reference — cheatsheets, techniques, and methodology</p>
-        <div class="home-project-tags">
-          <span class="tag red-team">red-team</span><span class="tag">oscp</span>
-        </div>
-      </a>
-      <a href="https://github.com/antonytuff/Automation" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Python</span>
-        </div>
-        <h3>Automation</h3>
-        <p>Automating boring stuff with Python — security scripts, recon tools, and workflow automation</p>
-        <div class="home-project-tags">
-          <span class="tag">python</span><span class="tag">automation</span>
-        </div>
-      </a>
-      <a href="https://github.com/antonytuff/anthonytuff" target="_blank" class="home-project-card">
-        <div class="home-project-header">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          <span class="home-project-lang">Python/CSS</span>
-        </div>
-        <h3>anthonytuff blog</h3>
-        <p>Hacker-themed cybersecurity blog, HTB writeups, and online resume</p>
-        <div class="home-project-tags">
-          <span class="tag">blog</span><span class="tag">writeups</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- Achievements Section -->
-    <div class="section-header reveal">
-      <h1>~/achievements</h1>
-      <p>Milestones and accomplishments</p>
-    </div>
-    <div class="home-achievements reveal">
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Completed <strong>200+</strong> cybersecurity engagements across enterprise, government, and financial sectors</span>
-      </div>
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Achieved <strong>HackTheBox Pro Hacker</strong> rank</span>
-      </div>
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Multiple <strong>CTF competition podiums</strong> across national and international events</span>
-      </div>
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Active security researcher and blogger at <a href="https://antonytuff.github.io" style="color:var(--cyan)">sploitony.com</a></span>
-      </div>
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Built AI-powered <strong>Attack Surface Dashboard</strong> with multi-scanner integration</span>
-      </div>
-      <div class="home-achievement-item">
-        <span class="achievement-icon">+</span>
-        <span>Hold <strong>11 professional certifications</strong> including CEH Master, CRTE, CRTO, eWPTXv2</span>
-      </div>
-    </div>
-
-    <!-- Latest Posts Section -->
     <div class="section-header reveal">
       <h1>latest</h1>
       <p>Recent posts and writeups</p>
