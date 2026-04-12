@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git config:*)",
+      "Bash(git -C \"c:/Users/anton/OneDrive/Blog/anthonytuff\" remote -v)",
+      "Bash(git -C \"/c/Users/anton/OneDrive/Blog/anthonytuff\" rev-parse --git-dir)",
+      "Bash(git -C \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\" rev-parse --git-dir)",
+      "Bash(gh auth:*)",
+      "Bash(winget install:*)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/GitHub CLI:/c/Users/anton/AppData/Local/Microsoft/WinGet/Packages\")",
+      "Read(//c/Program Files/GitHub CLI//**)",
+      "Read(//c/Program Files \\(x86\\)/**)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh\" auth status)",
+      "Bash(python build.py)",
+      "Bash(pip install:*)",
+      "Bash(git -C \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\" status)",
+      "Bash(rm -rf \"C:/Users/anton/OneDrive/Blog/anthonytuff/output\")",
+      "Bash(cd \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\")",
+      "Bash(git -C \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\" add static/style.css)",
+      "Bash(git -C \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\" commit -m \"Widen container for post layout to prevent squeezed content\")",
+      "Bash(git -C \"C:\\\\\\\\Users\\\\\\\\anton\\\\\\\\OneDrive\\\\\\\\Blog\\\\\\\\anthonytuff\" push origin main)",
+      "Bash(GIT_DIR=\"C:/Users/anton/OneDrive/Blog/anthonytuff/.git\" GIT_WORK_TREE=\"C:/Users/anton/OneDrive/Blog/anthonytuff\" git status)",
+      "Bash(git --git-dir=\"C:/Users/anton/OneDrive/Blog/anthonytuff/.git\" --work-tree=\"C:/Users/anton/OneDrive/Blog/anthonytuff\" status)",
+      "Bash(git --git-dir=\"/c/Users/anton/OneDrive/Blog/anthonytuff/.git\" --work-tree=\"/c/Users/anton/OneDrive/Blog/anthonytuff\" status)",
+      "WebFetch(domain:sploitony.com)"
+    ]
+  }
+}

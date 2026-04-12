@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} | {{site_name}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="stylesheet" href="{{root}}static/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>></text></svg>">
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+
+  <header>
+    <div class="container">
+      <a href="{{root}}index.html" class="logo">
+        &gt; {{site_name}}<span class="cursor">_</span>
+        <span class="logo-subtitle"><span class="rotate-word" id="logo-rotate"></span></span>
+      </a>
+      <div class="nav-group">
+        <nav>
+          <a href="{{root}}index.html" class="{{nav_home}}">Home</a>
+          <a href="{{root}}blog.html" class="{{nav_blog}}">Blog</a>
+          <a href="{{root}}writeups.html" class="{{nav_writeups}}">Writeups</a>
+          <a href="{{root}}resume.html" class="{{nav_resume}}">Resume</a>
+          <a href="{{root}}contact.html" class="{{nav_contact}}">Contact</a>
+        </nav>
+        <button class="global-search-toggle" onclick="openSearch()" title="Search (Ctrl+K)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container {{container_class}}">
+      {{content}}
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="social-icons">
+          <a href="https://github.com/antonytuff" target="_blank" title="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://twitter.com/yourhandle" target="_blank" title="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="mailto:you@example.com" title="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+        <p>Built with Python & Markdown | Hack the planet</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Search overlay -->
+  <div class="search-overlay" id="search-overlay" onclick="if(event.target===this)closeSearch()">
+    <div class="search-modal">
+      <div class="search-modal-input">
+        <input type="text" id="global-search" placeholder="Search posts, writeups, tags..." autocomplete="off">
+        <span class="search-hint">ESC</span>
+      </div>
+      <div class="search-results" id="search-results"></div>
+      <div class="search-footer">
+        <span><kbd>Enter</kbd> to open</span>
+        <span><kbd>Esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ===== GLOBAL SEARCH =====
+  var searchIndex = [];
+
+  function loadSearchIndex() {
+    if (searchIndex.length) return Promise.resolve();
+    var root = document.querySelector('link[rel="stylesheet"]').href;
+    root = root.substring(0, root.indexOf('static/'));
+    return fetch(root + 'search-index.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) { searchIndex = data; });
+  }
+
+  function openSearch() {
+    loadSearchIndex();
+    document.getElementById('search-overlay').classList.add('open');
+    var input = document.getElementById('global-search');
+    input.value = '';
+    input.focus();
+    document.getElementById('search-results').innerHTML = '';
+  }
+
+  function closeSearch() {
+    document.getElementById('search-overlay').classList.remove('open');
+  }
+
+  // Ctrl+K shortcut
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+    if (e.key === 'Escape') closeSearch();
+  });
+
+  // Highlight matching text
+  function highlightMatch(text, query) {
+    if (!query) return text;
+    var regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  // Search logic
+  (function() {
+    var input = document.getElementById('global-search');
+    var resultsEl = document.getElementById('search-results');
+    if (!input) return;
+
+    var activeIdx = -1;
+
+    input.addEventListener('input', function() {
+      var q = this.value.toLowerCase().trim();
+      activeIdx = -1;
+      if (!q || q.length < 2) {
+        resultsEl.innerHTML = '';
+        return;
+      }
+
+      loadSearchIndex().then(function() {
+        var matches = [];
+        searchIndex.forEach(function(post) {
+          var titleMatch = post.title.toLowerCase().includes(q);
+          var descMatch = post.description.toLowerCase().includes(q);
+          var tagsMatch = post.tags.toLowerCase().includes(q);
+          var sectionMatch = post.section.toLowerCase().includes(q);
+          var score = 0;
+          if (titleMatch) score += 10;
+          if (tagsMatch) score += 5;
+          if (descMatch) score += 3;
+          if (sectionMatch) score += 1;
+          if (score > 0) {
+            matches.push({post: post, score: score});
+          }
+        });
+
+        matches.sort(function(a, b) { return b.score - a.score; });
+
+        if (matches.length === 0) {
+          resultsEl.innerHTML = '<div class="search-empty">No results for "' + q + '"</div>';
+          return;
+        }
+
+        // Determine root path
+        var root = '';
+        var link = document.querySelector('link[rel="stylesheet"]');
+        if (link) {
+          var href = link.getAttribute('href');
+          root = href.substring(0, href.indexOf('static/'));
+        }
+
+        var html = '';
+        matches.slice(0, 10).forEach(function(m) {
+          var p = m.post;
+          var tagsDisplay = '';
+          if (p.tags) {
+            p.tags.split(',').forEach(function(t) {
+              t = t.trim();
+              if (t) tagsDisplay += '<span class="result-tag">#' + t + '</span> ';
+            });
+          }
+          html += '<a href="' + root + p.url + '" class="search-result-item">' +
+            '<div class="result-title">' + highlightMatch(p.title, q) + '</div>' +
+            '<div class="result-meta">' +
+              '<span class="result-section">' + p.section + '</span>' +
+              '<span>' + p.date + '</span>' +
+              tagsDisplay +
+            '</div>' +
+            (p.description ? '<div class="result-desc">' + highlightMatch(p.description, q) + '</div>' : '') +
+          '</a>';
+        });
+
+        resultsEl.innerHTML = html;
+      });
+    });
+
+    // Keyboard navigation
+    input.addEventListener('keydown', function(e) {
+      var items = resultsEl.querySelectorAll('.search-result-item');
+      if (!items.length) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx + 1, items.length - 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx - 1, 0);
+      } else if (e.key === 'Enter' && activeIdx >= 0) {
+        e.preventDefault();
+        items[activeIdx].click();
+        return;
+      } else if (e.key === 'Enter' && items.length > 0) {
+        e.preventDefault();
+        items[0].click();
+        return;
+      } else {
+        return;
+      }
+
+      items.forEach(function(item, i) {
+        item.classList.toggle('active', i === activeIdx);
+        if (i === activeIdx) item.scrollIntoView({block: 'nearest'});
+      });
+    });
+  })();
+
+  // ===== LOGO ROTATING WORDS =====
+  (function() {
+    const el = document.getElementById('logo-rotate');
+    if (!el) return;
+    const words = [
+      'passionate about pentesting',
+      'breaking things ethically',
+      'hacking the planet',
+      'ctf addict',
+      'red team operator',
+      'always learning',
+      'exploit developer',
+      'security researcher'
+    ];
+    let idx = 0;
+    el.textContent = words[0];
+    setInterval(function() {
+      idx = (idx + 1) % words.length;
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.textContent = words[idx];
+      el.style.animation = 'fadeRotate 0.4s ease';
+    }, 3000);
+  })();
+
+  // ===== THEME TOGGLE =====
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  }
+
+  // Load saved theme
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  })();
+
+  // ===== PARTICLE NETWORK =====
+  (function() {
+    const canvas = document.getElementById('matrix-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w, h, particles, mouse = { x: -999, y: -999 };
+    const CONNECT_DIST = 150;
+    const MOUSE_DIST = 200;
+    const PARTICLE_COUNT = Math.min(80, Math.floor(window.innerWidth * window.innerHeight / 15000));
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r = Math.random() * 1.5 + 0.5;
+        // Assign color: mostly green, some cyan, rare purple
+        const roll = Math.random();
+        if (roll < 0.6) { this.color = '0, 255, 65'; }
+        else if (roll < 0.85) { this.color = '0, 212, 255'; }
+        else { this.color = '180, 77, 255'; }
+        this.baseAlpha = Math.random() * 0.5 + 0.3;
+        this.pulseSpeed = Math.random() * 0.02 + 0.005;
+        this.pulseOffset = Math.random() * Math.PI * 2;
+      }
+      update(t) {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > w) this.vx *= -1;
+        if (this.y < 0 || this.y > h) this.vy *= -1;
+        // Subtle mouse repulsion
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_DIST && dist > 0) {
+          const force = (MOUSE_DIST - dist) / MOUSE_DIST * 0.02;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
+        }
+        // Dampen velocity
+        this.vx *= 0.999;
+        this.vy *= 0.999;
+        this.alpha = this.baseAlpha + Math.sin(t * this.pulseSpeed + this.pulseOffset) * 0.15;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      resize();
+      particles = [];
+      const count = Math.min(PARTICLE_COUNT, Math.floor(w * h / 15000));
+      for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      frame++;
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update(frame);
+        particles[i].draw();
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const opacity = (1 - dist / CONNECT_DIST) * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 255, 65, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+
+        // Mouse connections
+        const mdx = particles[i].x - mouse.x;
+        const mdy = particles[i].y - mouse.y;
+        const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+        if (mdist < MOUSE_DIST) {
+          const opacity = (1 - mdist / MOUSE_DIST) * 0.25;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    window.addEventListener('resize', init);
+    document.addEventListener('mousemove', function(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    document.addEventListener('mouseleave', function() {
+      mouse.x = -999;
+      mouse.y = -999;
+    });
+  })();
+
+  // ===== TYPING EFFECT =====
+  (function() {
+    const el = document.querySelector('.typing-text');
+    if (!el) return;
+    const phrases = [
+      'Red Teamer',
+      'Penetration Tester',
+      'DevSecOps Engineer',
+      'Cloud Security Specialist',
+      'Security Automation Builder',
+      'AI Security Researcher',
+      'CTF Player',
+      'Threat Hunter'
+    ];
+    let phraseIdx = 0, charIdx = 0, deleting = false;
+
+    function type() {
+      const current = phrases[phraseIdx];
+      if (deleting) {
+        el.textContent = current.substring(0, charIdx--);
+        if (charIdx < 0) {
+          deleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          setTimeout(type, 400);
+          return;
+        }
+        setTimeout(type, 40);
+      } else {
+        el.textContent = current.substring(0, charIdx++);
+        if (charIdx > current.length) {
+          deleting = true;
+          setTimeout(type, 2000);
+          return;
+        }
+        setTimeout(type, 80);
+      }
+    }
+    setTimeout(type, 500);
+  })();
+
+  // ===== SEARCH & FILTER =====
+  (function() {
+    const searchInput = document.getElementById('search-input');
+    const tagBtns = document.querySelectorAll('.tag-filter');
+    const cards = document.querySelectorAll('.post-card');
+    const noResults = document.querySelector('.no-results');
+    if (!searchInput || !cards.length) return;
+
+    let activeTag = 'all';
+
+    function filterPosts() {
+      const query = searchInput.value.toLowerCase();
+      let visible = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('h2').textContent.toLowerCase();
+        const desc = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
+        const tags = card.getAttribute('data-tags') || '';
+        const matchesSearch = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
+        const matchesTag = activeTag === 'all' || tags.split(',').map(t => t.trim()).includes(activeTag);
+
+        if (matchesSearch && matchesTag) {
+          card.classList.remove('hidden');
+          visible++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (noResults) {
+        noResults.classList.toggle('visible', visible === 0);
+      }
+    }
+
+    searchInput.addEventListener('input', filterPosts);
+
+    tagBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        tagBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeTag = this.getAttribute('data-tag');
+        filterPosts();
+      });
+    });
+  })();
+
+  // ===== IN-POST SEARCH =====
+  (function() {
+    var input = document.getElementById('post-search');
+    var articleEl = document.getElementById('article-text');
+    if (!input || !articleEl) return;
+
+    var originalHTML = articleEl.innerHTML;
+
+    input.addEventListener('input', function() {
+      var q = this.value.trim();
+      if (!q || q.length < 2) {
+        articleEl.innerHTML = originalHTML;
+        return;
+      }
+
+      // Restore original first
+      articleEl.innerHTML = originalHTML;
+
+      // Walk text nodes and highlight matches
+      var regex = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      var walker = document.createTreeWalker(articleEl, NodeFilter.SHOW_TEXT, null, false);
+      var textNodes = [];
+      while (walker.nextNode()) {
+        if (walker.currentNode.parentNode.tagName !== 'CODE' &&
+            walker.currentNode.parentNode.tagName !== 'PRE' &&
+            regex.test(walker.currentNode.textContent)) {
+          textNodes.push(walker.currentNode);
+          regex.lastIndex = 0;
+        }
+      }
+
+      textNodes.forEach(function(node) {
+        var span = document.createElement('span');
+        span.innerHTML = node.textContent.replace(regex, '<mark class="search-highlight">$1</mark>');
+        node.parentNode.replaceChild(span, node);
+      });
+
+      // Scroll to first match
+      var first = articleEl.querySelector('.search-highlight');
+      if (first) first.scrollIntoView({behavior: 'smooth', block: 'center'});
+    });
+  })();
+
+  // ===== TOC ACTIVE TRACKING =====
+  (function() {
+    var tocLinks = document.querySelectorAll('.toc-link');
+    if (!tocLinks.length) return;
+
+    var headings = [];
+    tocLinks.forEach(function(link) {
+      var id = link.getAttribute('href').substring(1);
+      var el = document.getElementById(id);
+      if (el) headings.push({el: el, link: link});
+    });
+
+    function updateActive() {
+      var scrollPos = window.scrollY + 120;
+      var active = null;
+      headings.forEach(function(h) {
+        if (h.el.offsetTop <= scrollPos) active = h;
+      });
+      tocLinks.forEach(function(l) { l.classList.remove('toc-active'); });
+      if (active) active.link.classList.add('toc-active');
+    }
+
+    window.addEventListener('scroll', updateActive, {passive: true});
+    updateActive();
+  })();
+
+  // ===== TOC TOGGLE =====
+  (function() {
+    var tocTitle = document.querySelector('.toc-title');
+    if (!tocTitle) return;
+    tocTitle.addEventListener('click', function() {
+      tocTitle.closest('.toc').classList.toggle('collapsed');
+    });
+  })();
+
+  // ===== CONTACT FORM =====
+  (function() {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('.form-submit');
+      var textEl = btn.querySelector('.submit-text');
+      var sendingEl = btn.querySelector('.submit-sending');
+      var doneEl = btn.querySelector('.submit-done');
+
+      btn.classList.add('sending');
+      textEl.style.display = 'none';
+      sendingEl.style.display = 'inline';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {'Accept': 'application/json'}
+      }).then(function(r) {
+        btn.classList.remove('sending');
+        btn.classList.add('sent');
+        sendingEl.style.display = 'none';
+        doneEl.style.display = 'inline';
+        form.reset();
+        setTimeout(function() {
+          btn.classList.remove('sent');
+          doneEl.style.display = 'none';
+          textEl.style.display = 'inline';
+        }, 3000);
+      }).catch(function() {
+        btn.classList.remove('sending');
+        sendingEl.style.display = 'none';
+        textEl.style.display = 'inline';
+        textEl.textContent = '$ Error! Try again...';
+        setTimeout(function() {
+          textEl.textContent = '$ send_message --to anthonytuff';
+        }, 3000);
+      });
+    });
+  })();
+
+  // ===== SCROLL REVEAL =====
+  (function() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(el => observer.observe(el));
+  })();
+  </script>
+</body>
+</html>
