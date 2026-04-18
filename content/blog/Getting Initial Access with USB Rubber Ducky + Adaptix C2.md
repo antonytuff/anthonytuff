@@ -179,7 +179,10 @@ Plug the Ducky into the target machine's USB port. The entire sequence executes 
 ![](../static/img/Ducky/Pasted%20image%2020260418011951.png)
 
 The video below  shows the script getting executed on the target machine
-https://youtu.be/EqcoYG5jDP4
+
+<div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
+  <iframe src="https://www.youtube.com/embed/EqcoYG5jDP4" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
+</div>
 
 The first hit is the recon upload attempt, the second is the agent download. About 10 seconds after the GET request, you should see a new session appear in your Adaptix GUI  initial access achieved as shown below
 ![](../static/img/Ducky/Pasted%20image%2020260419011835.png)
