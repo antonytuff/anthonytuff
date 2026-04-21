@@ -1,5 +1,5 @@
 ---
-title: "Weaponizing the Rubber Ducky with Adaptix C2 - Part 2"
+title: "Weaponizing the Rubber Ducky with Adaptix C2 : Part 2"
 date: 2026-04-22
 tags: USB Rubber Ducky, Red Team, Evasion, Hacker gadgets,Intial Access, 
 description: In Part 2 of the Hak5 Toolkit series, We will walktrough hor chain together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky.
@@ -8,14 +8,15 @@ description: In Part 2 of the Hak5 Toolkit series, We will walktrough hor chain 
 
 A friend of mine recently challenged me to take my Rubber Ducky lab a step further and build something beyond the basics with more realistic payload chain. I decided to take that challenge on, so here we are for part 2.
 
- I will walk through how I chained together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky. We will look at two delivery methods: a PowerShell Runner approach and a more advanced chain that brings together amsi.fail, HostPayload, and DuckyScript  to get a live beacon on Adaptix C2. 
+ I will walk you through how I chained together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky. We will look at two delivery methods: a PowerShell Runner approach and a more advanced chain that brings together amsi.fail, HostPayload, and DuckyScript  to get a live beacon on Adaptix C2. 
  
  If you haven't already, I'd recommend checking out Part 1, where I covered the initial setup and shared some useful tips for working with the USB Rubber Ducky
 
 ### Setting Up Adaptix C2
 Before we get into the delivery methods, we need to get our C2 infrastructure ready by setting up our Adaptix C2 listener and generating the shellcode.
 
-In Adaptix C2, navigate to the agent generation section and select the Shellcode (.bin) format. we want the raw binary shellcode, not an executable. so with the  .bin format this is actually what we will be  feeding directly into our loaders and obfuscation tools. See the below steps 
+In Adaptix C2, navigate to the agent generation section and select the Shellcode (.bin) format. we want the raw binary shellcode, not an executable. With .bin format this is actually what we will be  feeding directly into our loaders and obfuscation tools. <br>
+See the below steps 
 ![](../static/img/Adaptix/Pasted%20image%2020260421171302.png)
 
 ![](../static/img/Adaptix/Pasted%20image%2020260421171344.png)
@@ -36,18 +37,21 @@ In Adaptix C2, navigate to the agent generation section and select the Shellcode
 [+] File saved: /root/AdaptixProjects/Evasion-AMSI-Ducky/system-agent.bin
 ```
 
-Having completed that , you should have an active HTTPS listener waiting for connections, and a raw shellcode .bin file ready to be delivered. 
+Having completed that, you should have an active HTTPS listener waiting for connections, and a raw shellcode .bin file ready to be delivered. 
 
 
 ### Delivery Methods
-Once we have our shellcode generated, there are various ways to deliver it to the target  but the key thing is that we want to remain fully undetectable. Our shellcode needs to run in memory without triggering antivirus, and therefore we need to creative with how we bypass defenses like AMSI and Windows Defender
+Once we have our shellcode generated, there are various ways to deliver it to the target  but the key thing is that we want to remain fully undetectable. Our shellcode needs to run in memory without triggering antivirus, and therefore we need to be creative with how we bypass defenses like AMSI and Windows Defender
 
 In my lab environment, the target is running the latest Windows build with the latest Windows Defender signatures fully up to date
 
 > If you're up against an EDR like CrowdStrike, SentinelOne, or Carbon Black, you'll need additional evasion techniques, the effort continue to scale with the defenses
 
 ### Method 1 : Using PowerShell runner
-The first delivery method we can use is the **PowerShell Runner**  it acts as our loader for the shellcode. You can check it out here  https://github.com/dievus/PowerShellRunner
+The first delivery method we can use is the **PowerShell Runner**  it acts as our loader for the shellcode. You can check it out here  [https://github.com/dievus/PowerShellRunner]
+
+The Script is as follows;
+
 ```powershell
 function potatoes {
     Param ($cherries, $pineapple)
