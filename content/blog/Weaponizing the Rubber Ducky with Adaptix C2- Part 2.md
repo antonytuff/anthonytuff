@@ -2,7 +2,7 @@
 title: "Weaponizing the Rubber Ducky with Adaptix C2 : Part 2"
 date: 2026-04-22
 tags: USB Rubber Ducky, Red Team, Evasion, Hacker gadgets,Intial Access, 
-description: In Part 2 of the Hak5 Toolkit series, We will walktrough hor chain together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky.
+description: In Part 2 of the Hak5 Toolkit series, We will walktrough hor to chain together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky.
  From keystroke injection to a live beacon on Adaptix C2, this post walks through the full attack chain step by step.
 ---
 
@@ -113,7 +113,7 @@ and just like that we have a beacon in our C2 infrastructure
 ### Method 2: AMSI Bypass, CLM Bypass & Ducky Script Delivery
 In this section, I will be bringing everything together and use our USB Rubber Ducky for delivery. The flow is going to be as follows: AMSI & Defender bypass, Constrained Language Mode (CLM) bypass, and DuckyScript for the final delivery chain. See the below that shows the  full attack chain from the Ducky's keystroke injection all the way to a beacon calling back to our Adaptix C2 server.
 
-![](../static/img/AdaptixPasted/Pasted%20image%2020260421205946.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260421205946.png)
 
 The key thing to note is in our attacker machine I am going to stage two payloads on a Python HTTP server: the AMSI bypass script and the HostPayload-obfuscated shellcode. The Ducky handles the rest it spawns PowerShell, pulls down each payload in sequence, and chains the bypasses together. By the time the shellcode executes, both AMSI and CLM are already out of the picture, and the beacon establishes an HTTPS callback to our Adaptix C2 listener.
 
@@ -122,16 +122,16 @@ The key thing to note is in our attacker machine I am going to stage two payload
 For the AMSI bypass, I opted to use `amsi.fail`  it's an online generator built by Flangvik that produces obfuscated PowerShell snippets designed to break or disable AMSI for the current process.
 
 The way AMSI works is that when a PowerShell process starts, `amsi.dll` gets loaded into its address space. Inside that DLL, there's a function called `AmsiScanBuffer()` which scans any script content before it's allowed to execute. If something matches a known signature, it gets blocked. The figure below illustrates the concept
-![](../static/img/AdaptixPasted/Pasted%20image%2020260421211336.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260421211336.png)
 
 ideally amsi.fail does generates snippets that tamper with `amsi.dll` in memory patching or breaking specific functions so the scan either fails silently or returns a clean result. the other beauty of it is that each time you generate a snippet, it's obfuscated differently, so the signatures keep changing.
  I went with the **Force Error** technique that worked out well for me, which essentially forces `AmsiScanBuffer()` to error out and return a success code instead of actually scanning meaning everything we run after that point flies under AMSI's radar. See the figure below
- ![](../static/img/AdaptixPasted/Pasted%20image%2020260421215827.png)
+ ![](../static/img/Adaptix/Pasted/Pasted%20image%2020260421215827.png)
 
 #### Shellcode Obfuscation with HostPayload
 Now that AMSI is out of the way, I decided to play around with a new tool I discovered called **HostPayload** ( https://github.com/rioasmara/hostpayload) by Rio Asmara. It take our raw shellcode generated from Adaptix C2 and convert it into obfuscated, encrypted PowerShell that runs entirely in memory. If you've used Chimera before, the concept is similar, it randomizes variable names, splits strings, and applies XOR encryption to the payload so there are no recognizable signatures in the final script.
 
-![](../static/img/AdaptixPasted/Pasted%20image%2020260421232620.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260421232620.png)
 
 under the hood what its actually happening , its obfuscates the C# P/Invoke calls so instead of having obvious strings like `VirtualAlloc` or `kernel32.dll` sitting in the script, those get split into multiple const strings with randomized class and method names. The end result is a `.ps1` file plus a one-liner which I will  directly download for execution.  
 
@@ -152,7 +152,7 @@ Invoke-WmiMethod -Class win32_process -Name create -ArgumentList "Powershell.exe
 sleep 5
 ```
 
-![](../static/img/AdaptixPasted/Pasted%20image%2020260421232710.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260421232710.png)
 
 #### Ducky Script
  Now that we have everything staged , I will develop the that chains the full attack flow something like below
@@ -199,12 +199,12 @@ ENTER
 For OPPSEC purposes, you may want to name your script to something else that is likely to blend in with the network and that does not look suscpicios  
 
 Complile the script using payload studio which converts it into the inject.bin file that gets loaded onto the Ducky's microSD card.
-![](../static/img/AdaptixPasted/Pasted%20image%2020260422000655.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260422000655.png)
 
 
 #### Execution & Getting the Reverse Connection
 Now for the fun part ,Once everything is staged, 
-![](../static/img/AdaptixPasted/Pasted%20image%2020260422001952.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260422001952.png)
 plug the Rubber Ducky into the target machine. Here's what happens in real time: the video below show the ducky script running
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
   <iframe src="https://www.youtube.com/embed/16YI5006Fzo" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
@@ -214,7 +214,7 @@ The Ducky opens the Run dialog, types `powershell`, and fires up a session. It i
 
 
 Within seconds, you should see the agent check in on your Adaptix C2 dashboard. The beacon calls back over HTTPS to your listener, and just like that we have a reverse connection. No files on disk, AMSI blinded, CLM bypassed, and a live beacon in our C2 infrastructure.
-![](../static/img/AdaptixPasted/Pasted%20image%2020260422002649.png)
+![](../static/img/Adaptix/Pasted/Pasted%20image%2020260422002649.png)
 From here, you can start layering on post-exploitation privilege escalation, lateral movement, credential harvesting, whatever the engagement calls for or what you are trying to achieve
 
 
