@@ -1,10 +1,12 @@
 ---
-title: "Weaponizing the Rubber Ducky with Adaptix C2"
+title: "Weaponizing the Rubber Ducky with Adaptix C2 - Part 2"
 date: 2026-04-22
 tags: USB Rubber Ducky, Red Team, Evasion, Hacker gadgets,Intial Access, 
+description: In Part 2 of the Hak5 Toolkit series, We will walktrough hor chain together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky.
+ From keystroke injection to a live beacon on Adaptix C2, this post walks through the full attack chain step by step.
 ---
 
-A friend of mine recently challenged me to take my Rubber Ducky lab a step further build something beyond the basics and put together a more realistic payload chain. I decided to take that challenge on, so here we are for part 2.
+A friend of mine recently challenged me to take my Rubber Ducky lab a step further and build something beyond the basics with more realistic payload chain. I decided to take that challenge on, so here we are for part 2.
 
  I will walk through how I chained together an AMSI bypass, a Constrained Language Mode bypass, and shellcode obfuscation to achieve in-memory code execution all delivered via the USB Rubber Ducky. We will look at two delivery methods: a PowerShell Runner approach and a more advanced chain that brings together amsi.fail, HostPayload, and DuckyScript  to get a live beacon on Adaptix C2. 
  
@@ -37,7 +39,7 @@ In Adaptix C2, navigate to the agent generation section and select the Shellcode
 Having completed that , you should have an active HTTPS listener waiting for connections, and a raw shellcode .bin file ready to be delivered. 
 
 
-## Delivery Methods
+### Delivery Methods
 Once we have our shellcode generated, there are various ways to deliver it to the target  but the key thing is that we want to remain fully undetectable. Our shellcode needs to run in memory without triggering antivirus, and therefore we need to creative with how we bypass defenses like AMSI and Windows Defender
 
 In my lab environment, the target is running the latest Windows build with the latest Windows Defender signatures fully up to date
@@ -201,7 +203,7 @@ Now for the fun part ,Once everything is staged,
 ![](../static/img/AdaptixPasted/Pasted%20image%2020260422001952.png)
 plug the Rubber Ducky into the target machine. Here's what happens in real time: the video below show the ducky script running
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
-  <iframe src="https://youtu.be/16YI5006Fzo?si=bpw5YxJT0xy1QLBV" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
+  <iframe src="https://www.youtube.com/embed/16YI5006Fzo" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allowfullscreen loading="lazy"></iframe>
 </div>
 
 The Ducky opens the Run dialog, types `powershell`, and fires up a session. It immediately pulls down the CLM bypass from our HTTP server you'll see the TEMP variables get redirected and a new PowerShell window spawn via WMI. The language mode check flashes `FullLanguage` in the console, confirming we're out of Constrained Language Mode. Then the final command fires a hidden PowerShell process downloads `amsi.txt`, the AMSI bypass executes first, killing AMSI for that session, and the obfuscated shellcode injects into memory right after.
@@ -214,13 +216,14 @@ From here, you can start layering on post-exploitation privilege escalation, lat
 
 ### References
 1. Asmara, R. (2026, February 1). AdaptixPowerShell: Get your C2 payload to the target without getting caught. 
- Cyber Security Architect_.  [https://rioasmara.com/2026/02/01/adaptixpowershell-get-your-c2-payload-to-the-target-without-getting-caught/](https://rioasmara.com/2026/02/01/adaptixpowershell-get-your-c2-payload-to-the-target-without-getting-caught/)
+  [https://rioasmara.com/2026/02/01/adaptixpowershell-get-your-c2-payload-to-the-target-without-getting-caught/](https://rioasmara.com/2026/02/01/adaptixpowershell-get-your-c2-payload-to-the-target-without-getting-caught/)
 
-2. lainkusanagi. (2025, May 23). Making a PowerShell shellcode downloader that evades Defender (without AMSI bypass). 
-   [https://medium.com/@luisgerardomoret_69654/making-a-powershell-shellcode-downloader-that-evades-defender-without-amsi-bypass-d2cf13f18409
-3. Rasta Mouse ThreatCheck [Computer software].  [https://github.com/rasta-mouse/ThreatCheck
+2. Making a PowerShell shellcode downloader that evades Defender 
+   [https://medium.com/@luisgerardomoret_69654/making-a-powershell-shellcode-downloader-that-evades-defender-without-amsi-bypass-d2cf13f18409]
 
-4. CLM bypass.  [https://sp00ks-git.github.io/posts/CLM-Bypass/](https://sp00ks-git.github.io/posts/CLM-Bypass/)
+3. Rasta Mouse ThreatCheck [https://github.com/rasta-mouse/ThreatCheck]
+
+4. CLM bypass. [https://sp00ks-git.github.io/posts/CLM-Bypass/]
 
 
 
