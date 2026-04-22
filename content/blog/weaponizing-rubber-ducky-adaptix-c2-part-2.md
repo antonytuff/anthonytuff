@@ -204,7 +204,12 @@ Complile the script using payload studio which converts it into the inject.bin f
 
 
 #### Execution & Getting the Reverse Connection
-Now for the fun part ,Once everything is staged, 
+Once everything is staged, the final amsi.txt file combines both the AMSI bypass and the HostPayload-obfuscated shellcode into a single script. As you can see from the screenshot below, the file has two key parts. <br>
+- **The obfuscated AMSI bypass**: that wall of text at the top is the amsi.fail-generated snippet. It looks like gibberish, and that's the point. It uses .NET reflection to tamper with amsi.dll in memory.<br>
+- **The HostPayload obfuscated shellcode**: appended at the bottom is the `IEX (New-Object Net.WebClient).DownloadString()` call that pulls down the converted PowerShell bypass script from our stager. The shellcode itself has already been converted and obfuscated by HostPayload -XOR encrypted, variable names randomized, P/Invoke calls split and scattered so Defender can't pattern-match any of it.<br>
+![](../static/img/Adaptix/Pasted%20image%2020260422101542.png)
+
+
 ![](../static/img/Adaptix/Pasted%20image%2020260422001952.png)
 Plug the Rubber Ducky into the target machine. Here's what happens in real time: the video below show the ducky script running
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;">
