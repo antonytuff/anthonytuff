@@ -22,7 +22,7 @@ See the below steps
 ![](../static/img/Adaptix/Pasted%20image%2020260421171344.png)
 
 
-```json
+```bash
 ----- Build process start -----
 [*] Building agent...
 [*] Listener 'Rubber_HTTP' profile created

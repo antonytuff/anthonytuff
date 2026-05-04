@@ -90,7 +90,7 @@ See the below steps below;
 
 ![](../static/img/Ducky/Pasted%20image%2020260417222701.png)
 
-```json
+```bash
 ----- Build process start -----
 [*] Building agent...
 [*] Listener 'Rubber_HTTP' profile created

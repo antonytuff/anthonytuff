@@ -317,6 +317,6 @@ The combination of these misconfigurations heap dump, environment variables, una
 
 # References
 - Spring Boot Actuator Documentation:  [https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
-- [https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html] (https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html)
-- [https://www.wiz.io/blog/spring-boot-actuator-misconfigurations] (https://www.wiz.io/blog/spring-boot-actuator-misconfigurations)
+- [https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html](https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html)
+- [https://www.wiz.io/blog/spring-boot-actuator-misconfigurations](https://www.wiz.io/blog/spring-boot-actuator-misconfigurations)
 
