@@ -1,8 +1,8 @@
 ---
 title: "Spring Boot Actuator A Closer Look at the Attack Surface"
 date: 2026-05-03
-tags: spring-boot-actuator, actuator-exploit,java-pentesting,security-research,misconfigurations, 
-description: In this post I walk through how an exposed /actuator/heapdump endpoint becomes the starting point for extracting database credentials, payment keys, AML platform secrets, and live session tokens..
+tags: spring-boot-actuator, actuator-exploit,java-pentesting,security-research,misconfigurations
+description: In this post I walk through how an exposed /actuator/heapdump endpoint becomes the starting point for extracting database credentials, payment keys, AML platform secrets, and live session tokens.
 ---
 Hello Folks
 
@@ -165,9 +165,11 @@ See below sample of that, I have encountered;
 ![](../static/img/actuator/Pasted%20image%2020260502001012.png)
 
 If you want to do deep anaylsis, we can explore other tools such as VisualVM that gives a full object browser against the .hprof file. Its is useful in cases whereyou want navigate the object graph rather than grep through raw strings.
-- Open the heap dump: File → Load → select app.hprof
-- From the VisualVM heap viewer, the most useful views are:
-	-Classes,  sort by instance count or retained heap size to find which object types dominate memory. In a banking app, look for anything with names like Session, Transaction, AccountDetails, JwtToken, DataSource
+    - Open the heap dump: File → Load → select app.hprof <br>
+    - From the VisualVM heap viewer, the most useful views are: <br>
+	-Classes,  sort by instance count or retained heap size to find which object types dominate memory.  <br>
+    
+    In a banking app, look for anything with names like Session, Transaction, AccountDetails, JwtToken, DataSource
 
 ![](../static/img/actuator/Pasted%20image%2020260502003631.png)
 
@@ -275,7 +277,8 @@ curl -s http://localhost:8080/actuator/logfile | grep -iE "(password|credentials
 In a client environment , Its ethical to reset the log levels when you're done.
 
 ### 4: Local File Inclusion (Debug Endpoint)
-During enumeration there was custom debug endpoint `/api/v2/debug/file` that accepts a file path parameter and returns the file contents in the response.We can actually finds it in actuator route map but its separate from the Actuator endpoints but often discovered alongside them. Any endpoint accepting a file, path, filename, or resource parameter is worth testing for.
+During enumeration there was custom debug endpoint `/api/v2/debug/file` that accepts a file path parameter and returns the file contents in the response.We can actually finds it in actuator route map but its separate from the Actuator endpoints but often discovered alongside them.<br>
+ Any endpoint accepting a file, path, filename, or resource parameter we can test against injection relation attack ssuch as LFI, path traversala and the likes.
 ```js
 // DebugController.java
 @GetMapping("/read-file")
@@ -314,6 +317,6 @@ The combination of these misconfigurations heap dump, environment variables, una
 
 # References
 - Spring Boot Actuator Documentation:  [https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
-- https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html
-- https://www.wiz.io/blog/spring-boot-actuator-misconfigurations
+- [https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html] (https://hacktricks.wiki/en/network-services-pentesting/pentesting-web/spring-actuators.html)
+- [https://www.wiz.io/blog/spring-boot-actuator-misconfigurations] (https://www.wiz.io/blog/spring-boot-actuator-misconfigurations)
 
