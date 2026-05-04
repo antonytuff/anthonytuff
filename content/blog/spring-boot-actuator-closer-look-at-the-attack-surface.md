@@ -2,24 +2,25 @@
 title: "Spring Boot Actuator A Closer Look at the Attack Surface"
 date: 2026-05-03
 tags: spring-boot-actuator, actuator-exploit,java-pentesting,security-research,misconfigurations, 
-description:. In this post I walk through how an exposed /actuator/heapdump endpoint becomes the starting point for extracting database credentials, payment keys, AML platform secrets, and live session tokens..
+description: In this post I walk through how an exposed /actuator/heapdump endpoint becomes the starting point for extracting database credentials, payment keys, AML platform secrets, and live session tokens..
 ---
 Hello Folks
 
 I have often found myself in penetration testing engagements where I come across Java-based backends, Spring Boot specifically. It is a stack that many organisations still adopt today, and a significant number of production services are still running on this Tech stack. In the banking and fintech sectors, you are likely going to  find it. So its worth hunting for.
 
-I must say, one thing I keep running into across a number of engagements is a simple misconfiguration. Spring Boot Actuator endpoints left exposed, either unauthenticated or poorly gated. On the surface it doesn't look alarming, you see a `/health`  endpoint and think nothing interesting here. But after digging a little deeper and some bit of research,  that misconfigured debug endpoint starts to look very different and can actually lead to remote code execution, credential extraction through endpoints like `/actuator/heapdump`,lateral movement into interconnected backend systems, and exposure of sensitive financial data that was never meant to leave the server.
+Inn my line of wrok,  I keep running into across a number of engagements is a simple misconfiguration. Spring Boot Actuator endpoints left exposed, either unauthenticated or poorly gated. On the surface it doesn't look alarming, you see a `/health`  endpoint and think nothing interesting here.<br> But after digging a little deeper and some bit of research,  that misconfigured debug endpoint starts to look very different and can actually lead to remote code execution, credential extraction through endpoints like `/actuator/heapdump`,lateral movement into interconnected backend systems, and exposure of sensitive financial data that was never meant to leave the server.
 
 In this writeup. I want to take you through how to identify meaningful data inside a heap dump, and how these individual misconfigurations can be chained together into something far more impactful than any single finding in isolation.
 
 ## Lab Setup
-To demonstrate these attack vectors in a controlled environment, I built a deliberately vulnerable banking-style application. "claude code for the win".  It simulates real-world banking functionality customer sessions, transaction processing, SWIFT integrations, AML hooks, and backend service calls. Atleast with it ,I can be able to see whats happening behind the hood and make changes wheere necessary. I will share this in my github incase you want to play around with it.  Check the references section and follow the setup guide. Actually I have added a number of interesting CVE that are worth hunting for. 
+To demonstrate these attack vectors in a controlled environment, I built a deliberately vulnerable banking-style application. "claude code for the win".  It simulates real-world banking functionality customer sessions, transaction processing, SWIFT integrations, AML hooks, and backend service calls. <br> Atleast with it ,I can be able to see whats happening behind the hood and make changes wheere necessary. <br>
+I will share this in my github incase you want to play around with it.  Check the references section and follow the setup guide. Actually I have added a number of interesting CVE that are worth hunting for. 
 
 The architecture looks like below
 ![](../static/img/actuator/Pasted%20image%2020260501221921.png)
 
 The architecture is actually simple, a main Spring Boot application acting as the public-facing entry point, with a set of backend services it communicates with internally. 
-Everything runs in an isolated Docker network, with the Banking API on `:8080` being the only surface exposed to the outside. I hope you like the naming conventioss of those services as much as I did,  it is highly likely that what you will find in financial sector. How cool is that. 
+Everything runs in an isolated Docker network, with the Banking API on `:8080` being the only surface exposed to the outside.<br> I hope you like the naming conventioss of those services as much as I did,  it is highly likely that what you will find in financial sector. How cool is that. 
 I don't only if its only on me , but anything relating to payment its just interest me....I guess its the "Kikuyu in me", Enough of that lets proceed.
 
 ![](../static/img/actuator/Pasted%20image%2020260501134650.png)
@@ -34,7 +35,7 @@ After setting the Lab, you should the containers all running and healthy.
 
 Before we get into Actuator and its exploitation . Lets cover some basics first.
 
-**Spring Boot** is a framework built on top of the Spring ecosystem. It's designed to get Java applications up and running quickly by handling configuration, dependency management, and application bootstrapping automatically what the Java world calls "convention over configuration." It's the dominant framework for building backend services in enterprise environments, and financial institutions love it because it integrates cleanly with database ORM layers, message queues, security frameworks, and payment APIs.
+**Spring Boot** is a framework built on top of the Spring ecosystem. It's designed to get Java applications up and running quickly by handling configuration, dependency management, and application bootstrapping automatically what the Java world calls "convention over configuration." It's the dominant framework for building backend services in enterprise environments, and financial institutions love it because it integrates cleanly with database ORM layers, message queues, security frameworks, and payment APIs.<br>
 
  In a microservices architecture, which is how most modern banking backends are structured  you will find dozens of independently deployed Spring Boot services communicating over internal HTTP or message brokers.
 
@@ -47,13 +48,14 @@ To enable it,  developer adds a single line to their build file like below.  and
 </dependency>
 ```
 
-The idea for exposing it ,its for monitoring or troubleshooting, checking if the application is healthy, what version is deployed, how the JVM is performing, whether database connections are alive, and so on.  So its actually a legitimate use and not a vulnerability by itself. 
+The idea for exposing it ,its for monitoring or troubleshooting, checking if the application is healthy, what version is deployed, how the JVM is performing, whether database connections are alive, and so on.  So its actually a legitimate use and not a vulnerability by itself. <br>
 Once the management API is exposed ,they are different endpoints that are served under /actuator by default, which will be covering in the recon section and their usage.
 
 
 ## Recon
 Enough with the theory, let's get into the lab. I believe you can find many resources out there that goes into inner working of the actuator itself, incase you want to learn more.
-Our starting point is a known target host running the vulnerable banking application. The first step is always building situational awareness, very important. even when scope is limited to a single IP, a port & service scan tells you what's running and on which ports. One you build you container it will expose a number of ports.
+Our starting point is a known target host running the vulnerable banking application. <br>
+The first step is always building situational awareness, very important. even when scope is limited to a single IP, a port & service scan tells you what's running and on which ports. One you build you container it will expose a number of ports.
 
 ![](../static/img/actuator/Pasted%20image%2020260501225529.png)
 
@@ -69,7 +71,7 @@ Based on the results , we can see a range of Actuator endpoints responding with 
 Lets go ahead and review the endpoints and see the actuator itself.
 ![](../static/img/actuator/Pasted%20image%2020260501184131.png)
 
-It's also worth to point out, that in a black-box engagements where you don't know upfront whether the target is Spring Boot, there are adtional strings that you can checklike 
+It's also worth pointing ut, that in a black-box engagements where you don't know upfront whether the target is Spring Boot, there are adtional strings that you can checklike 
 - `X-Application-Context` response header emitted by Spring Boot by default
 - Error pages with the Spring Boot white-label error format
 - `/actuator` returning a JSON object listing available sub-endpoints (Spring Boot 2.x default)
@@ -171,7 +173,8 @@ If you want to do deep anaylsis, we can explore other tools such as VisualVM tha
 
 ![](../static/img/actuator/Pasted%20image%2020260502005344.png)
 
-That last point about heap dumps that I want to emphasise from my own personal experience. I once I identified it from a public-facing application containing serialised HTTP client objects that were actively maintaining connections to three internal services that I had no knowledge of. The host addresses, authentication headers, and API paths could be extracted in memory. having access to this hosts, I used this intel in the internal network assessments and I was able to focus on high value targets with credentials I had gained.
+That last point about heap dumps that I want to emphasise from my own personal experience. I once I identified it from a public-facing application containing serialised HTTP client objects that were actively maintaining connections to three internal services that I had no knowledge of.<br>
+ The host addresses, authentication headers, and API paths could be extracted in memory. having access to this hosts, I used this intel in the internal network assessments and I was able to focus on high value targets with credentials I had gained.
 
 
 ### 2: Exposed Environment Variables
@@ -231,7 +234,8 @@ That last point is significant: the document service at 10.0.1.30:8083 is the sa
 
 
 ### 3: Writable Log Levels
-Based on the exposed actuator endpoints, the other thing that is worth checking is the the `/actuator/loggers`  which basically lets you see the java logger running in the JVM live.. It's not as flashy as pulling a heap dump or grabbing the secrets, but in terms of stealth and sustained credential harvesting it can be impactful, given a case where the application has active users logging in while you're there. We can escalate the log level with two POST requests, wait for victim traffic, then read the harvested tokens and passwords with a GET.  
+Based on the exposed actuator endpoints, the other thing that is worth checking is the the `/actuator/loggers`  which basically lets you see the java logger running in the JVM live.. It's not as flashy as pulling a heap dump or grabbing the secrets, but in terms of stealth and sustained credential harvesting it can be impactful, given a case where the application has active users logging in while you're there. <br>
+We can escalate the log level with two POST requests, wait for victim traffic, then read the harvested tokens and passwords with a GET.  
 
 Java logging has different logging levels including ERROR, WARN, INFO, DEBUG and TRACE. For our case if the TRACE logging is enabled, Spring Security logs the full internal state including the raw HTTP request which can contain plaintext username and password at the point where Spring Security first reads it, before any password encoder has processed it. 
 To carry out  this attack , I will begin by confirmig current logger levels.
@@ -304,7 +308,7 @@ curl -s "http://localhost:8080/api/v2/debug/read-file?path=/proc/1/environ" | jq
 
 # Conlusions
 I will leave it here for now, a Part 2 is coming where we can explore into CVEs related to Spring Boot, including more exploitation scenarios and how they chain into full compromise.
-What I wanted to demonstrate with this post is how much you can extract from a single exposed heap dump, and how that one artifact becomes the thread you pull on to unravel everything else. 
+What I wanted to demonstrate with this post is how much you can extract from a single exposed heap dump, and how that one artifact becomes the thread you pull on to unravel everything else.<br> <br>
 The combination of these misconfigurations heap dump, environment variables, unauthenticated config endpoints, writable log levels can creates an attack chain that is very real and exploitable. In some engagements I have been  these endpoints were enabled during development and UAT and then simply never locked down before go-live. 
 
 
