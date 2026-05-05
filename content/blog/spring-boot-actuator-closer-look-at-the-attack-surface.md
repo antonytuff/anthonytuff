@@ -8,18 +8,18 @@ Hello Folks
 
 I have often found myself in penetration testing engagements where I come across Java-based backends, Spring Boot specifically. It is a stack that many organisations still adopt today, and a significant number of production services are still running on this Tech stack. In the banking and fintech sectors, you are likely going to  find it. So its worth hunting for.
 
-Inn my line of wrok,  I keep running into across a number of engagements is a simple misconfiguration. Spring Boot Actuator endpoints left exposed, either unauthenticated or poorly gated. On the surface it doesn't look alarming, you see a `/health`  endpoint and think nothing interesting here.<br> But after digging a little deeper and some bit of research,  that misconfigured debug endpoint starts to look very different and can actually lead to remote code execution, credential extraction through endpoints like `/actuator/heapdump`,lateral movement into interconnected backend systems, and exposure of sensitive financial data that was never meant to leave the server.
+In my line of work, One issue I have continually encountered is misconfiguration in Spring boot actuator with endpoints left exposed, either unauthenticated or poorly gated. On the surface it doesn't look alarming, you see a `/health`  endpoint and think nothing interesting here.<br> But after digging a little deeper and some bit of research,that misconfigured debug endpoint starts to look very different and can actually lead to remote code execution, credential extraction through endpoints like `/actuator/heapdump`,lateral movement into interconnected backend systems, and exposure of sensitive financial data that was never meant to leave the server.
 
 In this writeup. I want to take you through how to identify meaningful data inside a heap dump, and how these individual misconfigurations can be chained together into something far more impactful than any single finding in isolation.
 
 ## Lab Setup
-To demonstrate these attack vectors in a controlled environment, I built a deliberately vulnerable banking-style application. "claude code for the win".  It simulates real-world banking functionality customer sessions, transaction processing, SWIFT integrations, AML hooks, and backend service calls. <br> Atleast with it ,I can be able to see whats happening behind the hood and make changes wheere necessary. <br>
-I will share this in my github incase you want to play around with it.  Check the references section and follow the setup guide. Actually I have added a number of interesting CVE that are worth hunting for. 
+To demonstrate these attack vectors in a controlled environment, I built a deliberately vulnerable banking-style application. "claude code for the win".  It simulates real-world banking functionality customer sessions, transaction processing, SWIFT integrations, AML hooks, and backend service calls. <br> Atleast with it ,I can be able to see whats happening under the hood and make changes where necessary. <br>
+I will the vulnlab in my github incase you want to play around with it. Check the references section and follow the setup guide.I have added a number of interesting CVE that are worth checking. 
 
 The architecture looks like below
 ![](../static/img/actuator/Pasted%20image%2020260501221921.png)
 
-The architecture is actually simple, a main Spring Boot application acting as the public-facing entry point, with a set of backend services it communicates with internally. 
+The architecture is actually, a main Spring Boot application acting as the public-facing entry point, with a set of backend services it communicates with internally. 
 Everything runs in an isolated Docker network, with the Banking API on `:8080` being the only surface exposed to the outside.<br> I hope you like the naming conventioss of those services as much as I did,  it is highly likely that what you will find in financial sector. How cool is that. 
 I don't only if its only on me , but anything relating to payment its just interest me....I guess its the "Kikuyu in me", Enough of that lets proceed.
 
@@ -33,9 +33,9 @@ After setting the Lab, you should the containers all running and healthy.
 
 ## What Is Spring Boot Actuator?
 
-Before we get into Actuator and its exploitation . Lets cover some basics first.
+Before we get into Actuator and its exploitation.Lets cover some basics first.
 
-**Spring Boot** is a framework built on top of the Spring ecosystem. It's designed to get Java applications up and running quickly by handling configuration, dependency management, and application bootstrapping automatically what the Java world calls "convention over configuration." It's the dominant framework for building backend services in enterprise environments, and financial institutions love it because it integrates cleanly with database ORM layers, message queues, security frameworks, and payment APIs.<br>
+**Spring Boot** is a framework built on top of the Spring ecosystem. It's designed to get Java applications up and running quickly by handling configuration, dependency management, and application bootstrapping automatically what the Java world calls "convention over configuration.". It's the dominant framework for building backend services in enterprise environments, and financial institutions love it because it integrates cleanly with database ORM layers, message queues, security frameworks, and payment APIs.<br>
 
  In a microservices architecture, which is how most modern banking backends are structured  you will find dozens of independently deployed Spring Boot services communicating over internal HTTP or message brokers.
 
@@ -53,7 +53,7 @@ Once the management API is exposed ,they are different endpoints that are served
 
 
 ## Recon
-Enough with the theory, let's get into the lab. I believe you can find many resources out there that goes into inner working of the actuator itself, incase you want to learn more.
+Enough with the theory, let's get into the lab. I believe you can find many resources out there that goes into inner working of the actuator.
 Our starting point is a known target host running the vulnerable banking application. <br>
 The first step is always building situational awareness, very important. even when scope is limited to a single IP, a port & service scan tells you what's running and on which ports. One you build you container it will expose a number of ports.
 
@@ -71,7 +71,7 @@ Based on the results , we can see a range of Actuator endpoints responding with 
 Lets go ahead and review the endpoints and see the actuator itself.
 ![](../static/img/actuator/Pasted%20image%2020260501184131.png)
 
-It's also worth pointing ut, that in a black-box engagements where you don't know upfront whether the target is Spring Boot, there are adtional strings that you can checklike 
+It's also worth pointing out, that in a black-box engagements where you don't know upfront whether the target is Spring Boot, there are adtional strings that you can checklike 
 - `X-Application-Context` response header emitted by Spring Boot by default
 - Error pages with the Spring Boot white-label error format
 - `/actuator` returning a JSON object listing available sub-endpoints (Spring Boot 2.x default)
