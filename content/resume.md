@@ -91,7 +91,7 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 ## education
 
-**B.Sc. Cyber Security** — EC-Council University *(2020 - 2026, Ongoing)*
+**B.Sc. Cyber Security** — EC-Council University *(2020 - 2026)*
 
 **Diploma in Information Technology** — Jomo Kenyatta University of Agriculture and Technology *(2015 - 2017)*
 

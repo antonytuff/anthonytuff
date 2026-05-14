@@ -164,7 +164,7 @@ and amounts mid-processing, database connection pool objects that carry credenti
 See below sample of that, I have encountered;
 ![](../static/img/actuator/Pasted%20image%2020260502001012.png)
 
-If you want to do deep anaylsis, we can explore other tools such as VisualVM that gives a full object browser against the .hprof file. Its is useful in cases whereyou want navigate the object graph rather than grep through raw strings.
+If you want to do deep anaylsis, we can explore other tools such as VisualVM that gives a full object browser against the .hprof file. Its is useful in cases whereyou want navigate the object graph rather than grep through raw strings. <br> <br>
     - Open the heap dump: File → Load → select app.hprof <br>
     - From the VisualVM heap viewer, the most useful views are: <br>
 	-Classes,  sort by instance count or retained heap size to find which object types dominate memory.  <br>

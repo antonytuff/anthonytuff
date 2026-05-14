@@ -9,6 +9,18 @@ from pathlib import Path
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import sys
 import json
+import hashlib
+
+
+def asset_version(path: 'Path') -> str:
+    """Return a short content-hash for cache busting; empty if missing."""
+    if not path.exists():
+        return ''
+    h = hashlib.md5()
+    with path.open('rb') as f:
+        for chunk in iter(lambda: f.read(65536), b''):
+            h.update(chunk)
+    return h.hexdigest()[:8]
 
 ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
@@ -418,59 +430,99 @@ def build_resume():
     </div>
     """
 
-    # Certifications as badges
+    # Certifications as terminal-style cards
     certs_html = ""
     if 'certifications' in sections:
-        badge_map = {
-            'ceh': ('CEH', 'EC-Council', 'ceh', 'static/badge-ceh.png'),
-            'ewptx': ('eWPTX', 'eLearnSecurity', 'ewptx', 'static/badge-ewptx.png'),
-            'crte': ('CRTE', 'Altered Security', 'crte', 'static/badge-crte.png'),
-            'crto': ('CRTO', 'Zero Point Security', 'crto', 'static/badge-crto.png'),
-            'ctia': ('CTIA', 'EC-Council', 'ctia', 'static/badge-ctia.png'),
-            'cnss': ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.png'),
-            'iso 22301': ('CLI', 'Datasec', 'cli', 'static/badge-cli.png'),
-            'cscu': ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png'),
-            'cei': ('CEI', 'EC-Council', 'cei', 'static/badge-cei.png'),
-            'ccna': ('CCNA', 'Cisco', 'ccna', 'static/badge-ccna.png'),
-        }
-        badges = []
+        # Order matters — most-specific keys first. "practical" must precede plain "ceh".
+        badge_map = [
+            ('ceh practical', ('CEH Master', 'EC-Council', 'ceh', 'static/badge-ceh-practical.png')),
+            ('ceh master', ('CEH Master', 'EC-Council', 'ceh', 'static/badge-ceh-practical.png')),
+            ('ceh', ('CEH', 'EC-Council', 'ceh', 'static/badge-ceh.jpg')),
+            ('ewptx', ('eWPTX', 'INE (eLearnSecurity)', 'ewptx', 'static/badge-ewptx.svg')),
+            ('crte', ('CRTE', 'Altered Security', 'crte', 'static/badge-crte.jpg')),
+            ('crto', ('CRTO', 'Zero Point Security', 'crto', 'static/badge-crto.png')),
+            ('ctia', ('CTIA', 'EC-Council', 'ctia', 'static/badge-ctia.png')),
+            ('csa', ('CSA', 'EC-Council', 'csa', 'static/badge-csa.jpg')),
+            ('cnss', ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.jpg')),
+            ('iso 22301', ('CLI', 'Datasec', 'cli', '')),
+            ('cscu', ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png')),
+            ('cei', ('CEI', 'EC-Council', 'cei', 'static/badge-cei.png')),
+            ('ccna', ('CCNA', 'Cisco', 'ccna', 'static/badge-ccna.png')),
+        ]
+        cards = []
         for line in sections['certifications'].strip().split('\n'):
             line = line.strip()
-            if line.startswith('- '):
-                cert_text = line[2:].strip()
-                verify_url = ''
-                if ' | ' in cert_text:
-                    cert_text, verify_url = cert_text.rsplit(' | ', 1)
-                    verify_url = verify_url.strip()
-                icon_cls = 'default'
-                short = cert_text[:4]
-                issuer = ''
-                badge_img = ''
-                for key, (abbr, iss, cls, img) in badge_map.items():
-                    if key in cert_text.lower():
-                        short = abbr
+            if not line.startswith('- '):
+                continue
+            cert_text = line[2:].strip()
+            verify_url = ''
+            if ' | ' in cert_text:
+                cert_text, verify_url = cert_text.rsplit(' | ', 1)
+                verify_url = verify_url.strip()
+
+            # Optional issue year embedded as [YYYY]
+            issued = ''
+            year_match = re.search(r'\[(\d{4})\]', cert_text)
+            if year_match:
+                issued = year_match.group(1)
+                cert_text = re.sub(r'\s*\[\d{4}\]\s*', ' ', cert_text).strip()
+
+            # Split into title and issuer on " - "
+            title = cert_text
+            issuer = ''
+            if ' - ' in cert_text:
+                title, issuer = cert_text.split(' - ', 1)
+                title = title.strip()
+                issuer = issuer.strip()
+
+            icon_cls = 'default'
+            # Derive a short acronym from the leading token (strip parens/version markers)
+            lead = re.split(r'[\s\(]', title, maxsplit=1)[0]
+            short = re.sub(r'[^A-Za-z0-9+]', '', lead)[:5] or title[:4].strip()
+            badge_img = ''
+            for key, (abbr, iss, cls, img) in badge_map:
+                if key in cert_text.lower():
+                    short = abbr
+                    if not issuer:
                         issuer = iss
-                        icon_cls = cls
-                        badge_img = img
-                        break
-                if badge_img and (ROOT / badge_img).exists():
-                    icon_html = f'<img src="{badge_img}" alt="{short}" class="badge-img">'
-                else:
-                    icon_html = f'<div class="badge-icon {icon_cls}">{short}</div>'
-                verify_html = f'<a href="{verify_url}" target="_blank" class="badge-verify">Verify</a>' if verify_url else ''
-                badges.append(f"""
-                <div class="badge">
-                  {icon_html}
-                  <div class="badge-info">
-                    <span class="badge-name">{cert_text}</span>
-                    {f'<span class="badge-issuer">{issuer}</span>' if issuer else ''}
-                    {verify_html}
-                  </div>
-                </div>""")
+                    icon_cls = cls
+                    badge_img = img
+                    break
+
+            if badge_img and (ROOT / badge_img).exists():
+                v = asset_version(ROOT / badge_img)
+                src = f'{badge_img}?v={v}' if v else badge_img
+                icon_html = f'<img src="{src}" alt="{short}" class="cert-icon-img" loading="lazy">'
+            else:
+                long_cls = ' long' if len(short) >= 4 else ''
+                icon_html = f'<div class="cert-icon-fallback {icon_cls}{long_cls}">{short}</div>'
+
+            verified_html = '<span class="cert-verified">[VERIFIED]</span>' if verify_url else ''
+            issued_html = f'<span class="cert-meta-item"><span class="cert-meta-key">Issued:</span> {issued}</span>' if issued else ''
+            issuer_html = f'<span class="cert-meta-item"><span class="cert-meta-key">Provider:</span> {issuer}</span>' if issuer else ''
+            verify_html = f'<a href="{verify_url}" target="_blank" class="cert-verify-link">$ view-credential --verify</a>' if verify_url else ''
+
+            cards.append(f"""
+            <div class="cert-card">
+              <div class="cert-icon-wrap">{icon_html}</div>
+              <div class="cert-body">
+                <div class="cert-head">
+                  <h3 class="cert-title">{title}</h3>
+                  {verified_html}
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-status"><span class="cert-status-dot"></span>Status: Active</span>
+                  {issued_html}
+                  {issuer_html}
+                </div>
+                {verify_html}
+              </div>
+            </div>""")
+
         certs_html = f"""
     <div class="resume-block reveal">
       <div class="resume-block-title"><span class="section-icon">[*]</span> certifications</div>
-      <div class="badge-grid">{''.join(badges)}</div>
+      <div class="cert-grid">{''.join(cards)}</div>
     </div>
     """
 
@@ -817,7 +869,18 @@ def build():
             meta["_path"] = md
             writeup_posts.append(meta)
 
-    all_posts = blog_posts + writeup_posts
+    project_posts = []
+    project_dir = CONTENT / "projects"
+    if project_dir.exists():
+        for md in project_dir.glob("*.md"):
+            text = md.read_text(encoding='utf-8')
+            meta, _ = parse_frontmatter(text)
+            meta["slug"] = md.stem
+            meta["url"] = f"projects/{md.stem}.html"
+            meta["_path"] = md
+            project_posts.append(meta)
+
+    all_posts = blog_posts + writeup_posts + project_posts
 
     # Pass 2: build posts with sidebar using all_posts for context
     for p in blog_posts:
@@ -826,8 +889,12 @@ def build():
     for p in writeup_posts:
         build_post(p["_path"], "writeups", all_posts, root="../")
 
+    for p in project_posts:
+        build_post(p["_path"], "projects", all_posts, root="../")
+
     build_listing(blog_posts, "blog", "cat /blog/*", "Cybersecurity articles, tutorials, and research")
     build_listing(writeup_posts, "writeups", "cat /writeups/*", "HackTheBox and CTF writeups")
+    build_listing(project_posts, "projects", "ls /projects/", "Tools, research, and open-source security projects")
     build_resume()
     build_contact()
     build_index(blog_posts, writeup_posts)
@@ -835,10 +902,16 @@ def build():
     # Generate search index JSON
     search_data = []
     for p in all_posts:
-        section = "blog" if "blog/" in p.get("url", "") else "writeups"
+        url = p.get("url", "")
+        if "blog/" in url:
+            section = "blog"
+        elif "projects/" in url:
+            section = "projects"
+        else:
+            section = "writeups"
         search_data.append({
             "title": p.get("title", "Untitled"),
-            "url": p.get("url", ""),
+            "url": url,
             "date": p.get("date", ""),
             "tags": p.get("tags", ""),
             "description": p.get("description", ""),
@@ -849,15 +922,23 @@ def build():
 
     print(f"[+] Built {len(blog_posts)} blog posts")
     print(f"[+] Built {len(writeup_posts)} writeups")
+    print(f"[+] Built {len(project_posts)} projects")
     print(f"[+] Search index: {len(search_data)} entries")
     print(f"[+] Output: {OUTPUT}")
 
 
 def serve(port=8000):
-    """Serve the output directory for local preview."""
+    """Serve the output directory for local preview, with no-cache headers."""
     os.chdir(OUTPUT)
-    handler = SimpleHTTPRequestHandler
-    server = HTTPServer(("0.0.0.0", port), handler)
+
+    class NoCacheHandler(SimpleHTTPRequestHandler):
+        def end_headers(self):
+            self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
+            super().end_headers()
+
+    server = HTTPServer(("0.0.0.0", port), NoCacheHandler)
     print(f"[*] Serving at http://localhost:{port}")
     print("[*] Press Ctrl+C to stop")
     try:
