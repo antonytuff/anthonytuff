@@ -624,8 +624,8 @@ def build_resume():
     <div class="resume-page">
       {header_html}
       {whoami_html}
-      {skills_html}
       {certs_html}
+      {skills_html}
       {exp_html}
       {ach_html}
       {edu_html}
