@@ -411,22 +411,62 @@ def build_resume():
     # Skills as styled grid
     skills_html = ""
     if 'skills' in sections:
-        items = []
+        # Small glyph per skill category (matched by case-insensitive substring on the label)
+        skill_icons = [
+            ('offensive', '⚔'),
+            ('web', '🜸'),
+            ('api', '🜸'),
+            ('network', '⌬'),
+            ('cloud', '☁'),
+            ('mobile', '⌘'),
+            ('devsecops', '∞'),
+            ('programming', '{}'),
+            ('dfir', '◉'),
+            ('framework', '▦'),
+            ('tools', '⚙'),
+        ]
+
+        def glyph_for(label_text):
+            ll = label_text.lower()
+            for key, g in skill_icons:
+                if key in ll:
+                    return g
+            return '›'
+
+        cards = []
         for line in sections['skills'].strip().split('\n'):
             line = line.strip()
-            if line.startswith('- '):
-                line = line[2:]
-                if '**' in line:
-                    parts = line.split('**')
-                    label = parts[1] if len(parts) > 1 else ''
-                    desc = parts[2].lstrip(':').strip() if len(parts) > 2 else ''
-                    items.append(f'<div class="skill-item"><strong>{label}</strong><span>{desc}</span></div>')
-                else:
-                    items.append(f'<div class="skill-item"><strong>{line}</strong></div>')
+            if not line.startswith('- '):
+                continue
+            line = line[2:]
+            label = ''
+            desc = ''
+            if '**' in line:
+                parts = line.split('**')
+                label = parts[1].strip() if len(parts) > 1 else ''
+                desc = parts[2].lstrip(':').strip() if len(parts) > 2 else ''
+            else:
+                label = line.strip()
+            chips_html = ''
+            if desc:
+                for chip in (c.strip() for c in desc.split(',')):
+                    if chip:
+                        chips_html += f'<span class="skill-chip">{chip}</span>'
+            icon = glyph_for(label)
+            cards.append(
+                f'<div class="skill-card">'
+                f'  <div class="skill-card-head">'
+                f'    <span class="skill-card-icon">{icon}</span>'
+                f'    <span class="skill-card-label">{label}</span>'
+                f'    <span class="skill-card-count">{chips_html.count("skill-chip") or ""}</span>'
+                f'  </div>'
+                f'  <div class="skill-chips">{chips_html}</div>'
+                f'</div>'
+            )
         skills_html = f"""
     <div class="resume-block reveal">
       <div class="resume-block-title"><span class="section-icon">&gt;_</span> skills</div>
-      <div class="skill-grid">{''.join(items)}</div>
+      <div class="skill-grid">{''.join(cards)}</div>
     </div>
     """
 
