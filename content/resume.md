@@ -6,11 +6,11 @@ cv_download: static/Anthony Mabi Wanjiku Resume.pdf
 
 ## whoami
 
-Cybersecurity Engineer with over 7 years of hands-on experience designing, assessing, and improving security controls across enterprise and corporate environments. Specialized in offensive security, red teaming, and penetration testing — with a growing focus on DevSecOps, cloud security, security automation, and AI-driven security solutions.
+Cybersecurity Engineer with over 7 years of hands-on experience designing, assessing, and improving security controls across enterprise and corporate environments. Specialized in offensive security, red teaming, and penetration testing with a growing focus on DevSecOps, cloud security, security automation, and AI-driven security solutions.
 
 Successfully delivered 200+ cybersecurity engagements spanning vulnerability assessments, penetration tests, configuration reviews, and risk audits across on-premises, cloud, and hybrid infrastructures. Experienced in embedding security into CI/CD pipelines, hardening cloud environments (AWS, Azure, GCP), and building automated security tooling to scale assessment workflows.
 
-Passionate about leveraging AI and machine learning to advance offensive and defensive security — from autonomous pentesting tools to intelligent threat detection. Actively researching AI red teaming, LLM security risks, and the intersection of generative AI with adversarial tradecraft. Committed to continuous learning, mentorship, and translating complex technical findings into clear, actionable risk insights for executive stakeholders.
+Passionate about leveraging AI and machine learning to advance offensive and defensive security from autonomous pentesting tools to intelligent threat detection. Actively researching AI red teaming, LLM security risks, and the intersection of generative AI with adversarial tradecraft. Committed to continuous learning, mentorship, and translating complex technical findings into clear, actionable risk insights for executive stakeholders.
 
 ## skills
 
@@ -85,8 +85,7 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 ## achievements
 
 - Completed 200+ cybersecurity projects across diverse sectors
-- HackTheBox Pro Hacker rank
-- Multiple CTF competition podiums
+- HackTheBox Hacker rank
 - Active security researcher and blogger at sploitony.com
 
 ## education

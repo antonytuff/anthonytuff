@@ -1,14 +1,14 @@
 ---
 title: Threat Carver
 date: 2025-05-29
-description: Streamlit-based explorer for the MITRE ATT&CK framework — surgical analysis of adversary TTPs with Atomic Red Team replication.
+description: Streamlit-based explorer for the MITRE ATT&CK framework surgical analysis of adversary TTPs with Atomic Red Team replication.
 tags: tools, red-team, mitre, threat-intel, python
 repo: https://github.com/antonytuff/threat-carver
 ---
 
 ## Overview
 
-**Threat Carver** is a Streamlit-based web application built on the [MITRE ATT&CK](https://attack.mitre.org/) framework. It gives offensive and detection-engineering teams a single interactive interface to pivot between threat groups, techniques, and replication payloads — pulling live data straight from the MITRE CTI repository and the [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) project.
+**Threat Carver** is a Streamlit-based web application built on the [MITRE ATT&CK](https://attack.mitre.org/) framework. It gives offensive and detection-engineering teams a single interactive interface to pivot between threat groups, techniques, and replication payloads pulling live data straight from the MITRE CTI repository and the [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team) project.
 
 > The name comes from "carving" precise TTPs out of the noisy ATT&CK catalogue and turning them into runnable, controlled tests.
 
