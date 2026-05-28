@@ -1,5 +1,5 @@
 ---
-title: "Lab Review Extreme Red Team Laboratories MAILSERVIC"
+title: "Lab Review Extreme Red Team Laboratories MAILSERVICE"
 date: 2026-05-29
 tags: Intial Access,Red Team,Active Directory,Lateral Movement, Tunnelling
 description: MAILSERVICE is a multi-domain Active Directory lab that covers the full attack chain. Initial access via mail server abuse, credential extraction, network pivoting, cross-domain trust exploitation, MSSQL privilege escalation, Kerberos delegation abuse, and DCSync. 
