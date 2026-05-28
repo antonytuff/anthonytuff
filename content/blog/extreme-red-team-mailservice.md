@@ -47,7 +47,8 @@ The lab exposes you to several common AD misconfigurations you will absolutely e
 
 ### 4. MSSQL Exploitation
 
-MSSQL is your entry point into `nsa.gov`. Cross-domain trust authentication, `xp_cmdshell`, service account identity abuse — these are all in play. If you have not spent time with MSSQL in a domain context, expect this to humble you slightly before it teaches you.
+The lab teaches you how cross-domain trust authentication works with SQL Server ,how a credential from one domain can be leveraged against a database in another via Kerberos referral. 
+If you have only ever used MSSQL as a simple code execution vector, this lab will deepen your understanding considerably. Understanding how SQL logins map to Windows identities and how to chain that into domain-level privilege escalation is a genuinely useful skill that translates directly to real engagements.
 
 ### 5. Privilege Escalation
 
