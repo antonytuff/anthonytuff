@@ -1,14 +1,14 @@
 ---
 title: Attack Surface Dashboard
 date: 2026-01-22
-description: AI-powered multi-tenant vulnerability management platform — aggregates 13+ scan formats, runs autonomous agentic scans, and turns raw output into prioritised, exploitable findings with one-click reports.
+description: AI-powered multi-tenant vulnerability management platform aggregates 13+ scan formats, runs autonomous agentic scans, and turns raw output into prioritised, exploitable findings with one-click reports.
 tags: tools, ai, vulnerability-management, automation, python, fastapi, red-team
 repo: https://github.com/antonytuff/attack-surface-dashboard
 ---
 
 ## Overview
 
-**Attack Surface Dashboard** is a self-hosted, AI-augmented vulnerability management platform built for penetration testers and security teams. It ingests output from a broad range of scanners, normalises it into a finding model, and then layers AI analysis, deduplication, and reporting on top — all behind a multi-tenant web UI with role-based access.
+**Attack Surface Dashboard** is a self-hosted, AI-augmented vulnerability management platform built for penetration testers and security teams. It ingests output from a broad range of scanners, normalises it into a finding model, and then layers AI analysis, deduplication, and reporting on top all behind a multi-tenant web UI with role-based access.
 
 Designed to replace the spreadsheet-driven post-engagement workflow with something that feels like a proper SOC-grade product, just lighter and runnable on a single host.
 
@@ -19,7 +19,7 @@ Designed to replace the spreadsheet-driven post-engagement workflow with somethi
 ## What it does
 
 ### Scan ingestion (13 parsers)
-Nmap · Burp Suite · OWASP ZAP · Nessus · Nuclei · Shodan · and more — drop in any supported export and the parser stack normalises it into the unified `Finding` model with deduplication and severity mapping.
+Nmap · Burp Suite · OWASP ZAP · Nessus · Nuclei · Shodan · and more  drop in any supported export and the parser stack normalises it into the unified `Finding` model with deduplication and severity mapping.
 
 ### Live scanning (38 integrations + MCP)
 Run scans directly from the UI against 38 built-in scanner integrations, plus arbitrary external tooling via the **MCP (Model Context Protocol)** server interface — letting Claude/LLM-driven agents call shell tools as first-class actions.
@@ -103,9 +103,9 @@ Default login: `admin` / `admin123`. Then point any supported scanner at the tar
 
 ---
 
-## Why it exists
+## Probelem Statement
 
-Existing vulnerability-management tools are either enterprise-priced (Tenable, Rapid7) or shallow CSV viewers. This project compresses what a small pentest team actually needs — *parse → analyse → assign → report* — into a single Docker container, with an AI layer that turns raw scanner output into prioritised findings instead of a 4-figure-line CSV. Useful for:
+Existing vulnerability-management tools are either enterprise-priced (Tenable, Rapid7) or shallow CSV viewers. This project compresses what a small pentest team actually needs — *parse → analyse → assign → report*  into a single Docker container, with an AI layer that turns raw scanner output into prioritised findings instead of a 4-figure-line CSV. Useful for:
 
 - Internal red teams that want a persistent finding store across engagements
 - Boutique pentest shops needing automated client deliverables

@@ -9,7 +9,7 @@ description: MAILSERVICE is a multi-domain Active Directory lab that covers the 
 
 A good friend of mine, [zerofrost](https://allannjuguna.github.io/) you know the type, always dropping links and saying "bro just try this"  pushed me toward Extreme Red Team Laboratories, and I am genuinely glad he did. After sitting CRTE and CRTO just recently, I was looking for something that would push me further into real Active Directory attack chains.
 
-This is 2 cents review.
+This my 2 cents review.
 
 ## MAILSERVICE Lab?
 
@@ -106,7 +106,7 @@ If your report passes review, you purchase your badge and you are officially cer
 
 ## Conclusion
 
-I recommend MAILSERVICE, without hesitation, to any practitioner who has completed a structured AD course and wants to test themselves against something closer to a real engagement.On the OPSEC point. there are no blue teams watching your steps in this lab, so do not let that hold you back. That said, it is absolutely something you can train yourself on while you are in the environment. If you want to go the extra mile, spin up a C2 framework and run your operations through it. The lab gives you the freedom to practice that kind of tradecraft alongside the core attack chain
+I would recommend MAILSERVICE, without hesitation, to any practitioner who has completed a structured AD course and wants to test themselves against something closer to a real engagement.On the OPSEC point. there are no blue teams watching your steps in this lab, so do not let that hold you back. That said, it is absolutely something you can train yourself on while you are in the environment. If you want to go the extra mile, spin up a C2 framework and run your operations through it. The lab gives you the freedom to practice that kind of tradecraft alongside the core attack chain
 
 [ERL](https://extremeredlab.0x29a.it/chains) have a genuinely good catalogue of labs and I would recommend them to anyone serious about levelling up their red team skills.Its actually affordable. I have already started looking at their **SUMMOS lab** as my next target. SUMMOS chains multiple environments including cloud components. the kind of modern multi-domain attack surface that reflects where real enterprise environments are heading. If the quality matches MAILSERVICE, it is going to be a very good time.
 
