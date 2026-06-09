@@ -27,16 +27,16 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 ## certifications
 
-- CEH v10 (Certified Ethical Hacker) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
-- CEH Practical & Master - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=KnNhdPoEkCdZXvoHgmjTBcCbkAoHleh/TVfOjarRJNM=
-- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity | https://verified.elearnsecurity.com/certificates/04e92ddf-a2be-4ca8-ae4b-bc909ab2947e
-- CRTE (Certified Red Team Expert) - Altered Security | https://www.youracclaim.com/verify/XXXXX
+- CEH v10 (Certified Ethical Hacker) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=4Eofj5MDBWladzSSHB/NeEFQpBKZ1i//S4bMTPfwfwo=
+- CEH Practical & Master - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=ybfK9yRHt9K6/dFJ0LvEuFEJSg2wHwe7PBzogai0QKY=
+- eWPTXv2 (Web Application Penetration Tester Extreme) - eLearnSecurity | https://my.ine.com/certificate/7479268
+- CRTE (Certified Red Team Expert) - Altered Security | https://www.credential.net/be96723d-54ea-4037-9ce5-cb01d3665ec1#acc.bfoDiUAt
 - CRTO (Certified Red Team Operator) - Zero Point Security | https://certs.zeropointsecurity.co.uk/4bcd592b-16a6-4ced-ab71-bcd0eab781dc#acc.fkqCdUWz
-- CTIA (Certified Threat Intelligence Analyst) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- CTIA (Certified Threat Intelligence Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=fcWToDUcpmqN1NBPUeOtr2rV0rGUmouiMvZAbKaN4eI=
 - CSA (Certified SOC Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=6GtvaQdY0D8klMbqkhjurSFr1Hu5KPTzXwguosGs1ts=
-- CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.icsi.co.uk/verify/XXXXX
+- CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.credential.net/48010407-4e1d-4fe1-8965-2c44c10ae0cc#acc.EztcQRgp
 - CLI (Certified Lead Implementer ISO 22301) - Datasec | https://www.credly.com/verify/XXXXX
-- CSCU v2 (Certified Secure Computer User) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
+- CSCU v2 (Certified Secure Computer User) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=1jz1YiEAHDByILjxjY6Y8NLFHW/WN9RBi440e9IJt94=
 - CEI (Certified EC-Council Instructor) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
 - CCNA (Cisco Certified Network Associate) - Cisco | https://www.credly.com/verify/XXXXX
 

@@ -20,13 +20,13 @@ You start with a network, a VPN connection that can be requested  in their disco
 Just like the icon, you are likely going to scratch you head as you join in the dots and trying to find out what make sense.
 
 The lab covers a full realistic attack chain including:
-- **Initial foothold** 
-- **Credential extraction** 
-- **Network pivoting** using tunneling tools
-- **Cross-domain trust exploitation** via Kerberos
-- **MSSQL abuse** with cross-domain authentication
-- **Privilege escalation** 
-- **Active Directory delegation abuse**  RBCD, constrained delegation, and unconstrained delegation
+- **Initial foothold** <br>
+- **Credential extraction** <br>
+- **Network pivoting** using tunneling tools<br>
+- **Cross-domain trust exploitation** via Kerberos<br>
+- **MSSQL abuse** with cross-domain authentication<br>
+- **Privilege escalation** <br>
+- **Active Directory delegation abuse**  RBCD, constrained delegation, and unconstrained delegation<br>
 
 In short: it is a realistic multi-stage attack chain that mirrors what you would encounter on an actual red team engagement.
 
@@ -58,9 +58,9 @@ There are multiple escalation opportunities in the lab. Not all of them lead som
 
 ## The Good
 
-**Realistic environment.** Every technique the lab requires maps directly to what you encounter on real red team engagements. This is not a CTF with contrived vulnerabilities. The misconfigurations are the kind that you find in real world production environements.
+**Realistic environment.** Every technique the lab requires maps directly to what you encounter on real active directory style engagements The misconfigurations are the kind that you find in real world production environements.
 
-**The technical depth .** You will not finish this lab by copy-pasting tools. You need to understand what each step does and why, because when the obvious path is blocked and it will be blocked , you need to reason your way to an alternative. That reasoning process is where the real learning happens. I actually appreciate how it made me have some sleepless nights  to figure out why a particular pattern was not working,
+**The technical depth .** You will not finish this lab by copy-pasting comamnds. You need to understand what each step does and why, because when the obvious path is blocked and it will be blocked , you need to reason your way to an alternative. That reasoning process is where the real learning happens. I actually appreciate how it made me have some sleepless nights  to figure out why a particular pattern was not working,
 
 **Two-domain architecture.** Having to operate across two domains connected by a trust adds a layer of realism that single-domain labs simply cannot replicate. Learning how cross-domain authentication works and how to leverage it is a skill set that separates intermediate practitioners from advanced ones.
 
@@ -85,13 +85,13 @@ This is a shared lab environment, and **other players leave traces.** During my 
 
 ## What I Would Recommend Brushing Up On Before Starting
 
-Based on my experience, I would recommend being solid on the following before diving in:
-- **Active Directory fundamentals** authentication, trusts, group policies, and privilege hierarchies
-- **Kerberos** not just the attack tools, but how the protocol actually works
-- **Network pivoting** multi-hop tunneling in segmented environments
-- **PowerShell operational security** what restrictions exist and how to work within them
-- **Privilege escalation methodology** structured, not just tool-driven
-- **Enumeration discipline**  knowing what questions to ask, not just which commands to run
+Based on my experience, I would recommend being solid on the following before diving in:<br><br>
+- **Active Directory fundamentals** authentication, trusts, group policies, and privilege hierarchies<br><br>
+- **Kerberos** not just the attack tools, but how the protocol actually works<br><br>
+- **Network pivoting** multi-hop tunneling in segmented environments<br><br>
+- **PowerShell operational security** what restrictions exist and how to work within them<br><br>
+- **Privilege escalation methodology** structured, not just tool-driven<br><br>
+- **Enumeration discipline**  knowing what questions to ask, not just which commands to run<br><br>
 
 If you have done CRTE or CRTO and felt comfortable with the material, you are ready for this lab. It will still challenge you and may not, but you willl understand whats going on.
 
