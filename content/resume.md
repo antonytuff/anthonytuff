@@ -35,7 +35,7 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 - CTIA (Certified Threat Intelligence Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=fcWToDUcpmqN1NBPUeOtr2rV0rGUmouiMvZAbKaN4eI=
 - CSA (Certified SOC Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=6GtvaQdY0D8klMbqkhjurSFr1Hu5KPTzXwguosGs1ts=
 - MCRTA (Certified Multi-Cloud Red Team Analyst) -Cyberwarfare Labs | https://labs.cyberwarfare.live/credential/achievement/68f7a6dab92934ef2ad7df0c
-- Mail Service(Extreme Red Team) - Extreme Red Team Laboratories | https://credsverse.com/credentials/c99f9366-d39a-41e6-8fd9-c1306a101f57?preview=1
+- Mail Service (Extreme Red Team) - Extreme Red Team Laboratories | https://credsverse.com/credentials/c99f9366-d39a-41e6-8fd9-c1306a101f57?preview=1
 - CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.credential.net/48010407-4e1d-4fe1-8965-2c44c10ae0cc#acc.EztcQRgp
 - CLI (Certified Lead Implementer ISO 22301) - Datasec | https://www.credly.com/verify/XXXXX
 - CSCU v2 (Certified Secure Computer User) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=1jz1YiEAHDByILjxjY6Y8NLFHW/WN9RBi440e9IJt94=

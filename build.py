@@ -483,6 +483,8 @@ def build_resume():
             ('crto', ('CRTO', 'Zero Point Security', 'crto', 'static/badge-crto.png')),
             ('ctia', ('CTIA', 'EC-Council', 'ctia', 'static/badge-ctia.png')),
             ('csa', ('CSA', 'EC-Council', 'csa', 'static/badge-csa.jpg')),
+            ('mcrta', ('MCRTA','Cyberwarfare Labs', 'mcrta', 'static/badge-mcrta.png')),
+            ('Mail Service', ('Mail Service', 'Extreme Red Team Laboratories','static/badge-exreme-mail.')),            
             ('cnss', ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.jpg')),
             ('iso 22301', ('CLI', 'Datasec', 'cli', '')),
             ('cscu', ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png')),
