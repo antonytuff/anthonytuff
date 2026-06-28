@@ -277,23 +277,25 @@ def collect_used_tags(posts):
     return sorted(tags)
 
 
-def build_search_filter_html(posts):
-    """Build the search bar and tag filter buttons."""
-    used_tags = collect_used_tags(posts)
-
-    tag_buttons = '<button class="tag-filter active" data-tag="all">all</button>\n'
-    for tag in used_tags:
-        cls = get_tag_class(tag)
-        tag_buttons += f'          <button class="tag-filter {cls}" data-tag="{tag}">{tag}</button>\n'
+def build_search_filter_html(posts, show_tag_filters=True):
+    """Build the search bar and, optionally, the tag filter buttons."""
+    tag_filters_html = ""
+    if show_tag_filters:
+        used_tags = collect_used_tags(posts)
+        tag_buttons = '<button class="tag-filter active" data-tag="all">all</button>\n'
+        for tag in used_tags:
+            cls = get_tag_class(tag)
+            tag_buttons += f'          <button class="tag-filter {cls}" data-tag="{tag}">{tag}</button>\n'
+        tag_filters_html = f"""
+      <div class="tag-filters">
+        {tag_buttons}
+      </div>"""
 
     return f"""
     <div class="search-filter-bar">
       <div class="search-box">
         <input type="text" id="search-input" placeholder="grep -i 'search posts...'" autocomplete="off">
-      </div>
-      <div class="tag-filters">
-        {tag_buttons}
-      </div>
+      </div>{tag_filters_html}
     </div>
     """
 
@@ -689,12 +691,12 @@ def build_resume():
 def build_index(blog_posts, writeup_posts):
     """Build the homepage."""
     all_posts = blog_posts + writeup_posts
-    recent = sorted(all_posts, key=lambda p: p.get("date", ""), reverse=True)[:5]
+    posts_sorted = sorted(all_posts, key=lambda p: p.get("date", ""), reverse=True)
 
-    search_html = build_search_filter_html(all_posts)
+    search_html = build_search_filter_html(all_posts, show_tag_filters=False)
 
     cards = []
-    for p in recent:
+    for p in posts_sorted:
         tags_str = p.get("tags", "")
         tags_html = build_tag_html(tags_str)
 
@@ -760,12 +762,13 @@ def build_index(blog_posts, writeup_posts):
 
     <div class="section-header reveal">
       <h1>latest</h1>
-      <p>Recent posts and writeups</p>
+      <p>Browse all posts and writeups</p>
     </div>
     {search_html}
     <div class="post-list">
       {''.join(cards) if cards else '<p style="color:var(--text-dim)">No posts yet.</p>'}
     </div>
+    <div class="pagination" data-per-page="6"></div>
     <div class="no-results">
       <p>root@blog:~# No matching posts found.</p>
     </div>

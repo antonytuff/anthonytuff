@@ -903,6 +903,36 @@ main { padding: 3rem 0; }
 
 .no-results.visible { display: block; }
 
+/* ===== PAGINATION ===== */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.page-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) { border-color: var(--green); color: var(--green); }
+
+.page-btn.active {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+}
+
+.page-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
 /* ===== ARTICLE CONTENT ===== */
 .article-content {
   max-width: 800px;

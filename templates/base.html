@@ -432,13 +432,16 @@
     const tagBtns = document.querySelectorAll('.tag-filter');
     const cards = document.querySelectorAll('.post-card');
     const noResults = document.querySelector('.no-results');
+    const paginationEl = document.querySelector('.pagination');
     if (!searchInput || !cards.length) return;
 
     let activeTag = 'all';
+    let currentPage = 1;
+    const perPage = paginationEl ? parseInt(paginationEl.dataset.perPage || '6', 10) : Infinity;
 
-    function filterPosts() {
+    function render() {
       const query = searchInput.value.toLowerCase();
-      let visible = 0;
+      const matched = [];
 
       cards.forEach(card => {
         const title = card.querySelector('h2').textContent.toLowerCase();
@@ -446,18 +449,57 @@
         const tags = card.getAttribute('data-tags') || '';
         const matchesSearch = !query || title.includes(query) || desc.includes(query) || tags.includes(query);
         const matchesTag = activeTag === 'all' || tags.split(',').map(t => t.trim()).includes(activeTag);
-
-        if (matchesSearch && matchesTag) {
-          card.classList.remove('hidden');
-          visible++;
-        } else {
-          card.classList.add('hidden');
-        }
+        if (matchesSearch && matchesTag) matched.push(card);
       });
 
+      cards.forEach(card => card.classList.add('hidden'));
+
       if (noResults) {
-        noResults.classList.toggle('visible', visible === 0);
+        noResults.classList.toggle('visible', matched.length === 0);
       }
+
+      if (!paginationEl) {
+        matched.forEach(card => card.classList.remove('hidden'));
+        return;
+      }
+
+      const totalPages = Math.max(1, Math.ceil(matched.length / perPage));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const start = (currentPage - 1) * perPage;
+      matched.slice(start, start + perPage).forEach(card => card.classList.remove('hidden'));
+
+      renderPagination(totalPages);
+    }
+
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) {
+        paginationEl.innerHTML = '';
+        return;
+      }
+
+      let html = `<button class="page-btn page-nav" data-page="prev"${currentPage === 1 ? ' disabled' : ''}>&lt; prev</button>`;
+      for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="page-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      html += `<button class="page-btn page-nav" data-page="next"${currentPage === totalPages ? ' disabled' : ''}>next &gt;</button>`;
+      paginationEl.innerHTML = html;
+
+      paginationEl.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const p = this.getAttribute('data-page');
+          if (p === 'prev') currentPage = Math.max(1, currentPage - 1);
+          else if (p === 'next') currentPage = Math.min(totalPages, currentPage + 1);
+          else currentPage = parseInt(p, 10);
+          render();
+          paginationEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      });
+    }
+
+    function filterPosts() {
+      currentPage = 1;
+      render();
     }
 
     searchInput.addEventListener('input', filterPosts);
@@ -470,6 +512,8 @@
         filterPosts();
       });
     });
+
+    render();
   })();
 
   // ===== IN-POST SEARCH =====
