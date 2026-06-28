@@ -15,9 +15,9 @@ So I have been grinding through the Extreme Red Team Labs active directory chain
 So this is not a spoiler, or revealing attack paths, nothing that's going to ruin it for you. This is more of a "here is what to expect and what you will learn" kind of post.
 
 ## What is CALIPENDULA?
-CALIPENDULA is an assumed breach lab, meaning you start with some minimal credentials already in hand. The idea is to simulate a scenario where an attacker already has a foothold and needs to find a way deeper into the network. The unique angle here compared to other labs is that it is a hybrid environment, you encounter a  Google Cloud Platform(GCP) and Active Directory in the same chain. You cannot just skip one and go to the other. They are connected by design and you need to understand both to move forward.
+CALIPENDULA is an assumed breach lab, meaning you start with some minimal credentials already in hand. The idea is to simulate a scenario where an attacker already has a foothold and needs to find a way deeper into the network. The unique angle here compared to other labs is that it is a hybrid environment, you encounter a Google Cloud Platform(GCP) and Active Directory in the same chain. You cannot just skip one and go to the other. They are connected by design and you need to understand both to move forward.
 
-I want to be honest,  I was not super strong on GCP when I started this. Thankfully I had gone through the MCRTA certification a while back which covers AWS, GCP and Azure from an attacker's perspective. If you are thinking about cloud security labs and you have not looked at MCRTA, it worth going through it, it gave me just enough foundation to not be completely lost here. Without it I would have been staring at the screen for days not knowing where to even start.
+I want to be honest,I was not super strong on GCP when I started this. Thankfully I had gone through the MCRTA certification a while back which covers AWS, GCP and Azure from an attacker's perspective. If you are thinking about cloud security labs and you have not looked at MCRTA, it worth going through it, it gave me just enough foundation to not be completely lost here. Without it I would have been staring at the screen for days not knowing where to even start.
 
 ## The GCP Side of Things
 
@@ -25,9 +25,9 @@ This was genuinely the most interesting part for me because it was newer territo
 
 The interesting thing about GCP attacks is how chained they can be. You might start with something small and it opens a door to something bigger. The enumeration phase is where you learn the most, you are constantly asking yourself what this identity can access and where that leads.
 
-I played around with a few tools, gcloud obviously, but also some others I had not used much before gcloud, pacu, and somet otjers. The experimentation was actually fun. Cloud security has a different flavour to it compared to pure AD work and I enjoyed that context switch.
+I played around with a few tools, gcloud obviously, but also some others I had not used much before gcloud, pacu, and somet others.Cloud security has a different flavour to it compared to pure AD work and I enjoyed that context switch.
 
-I will not say more than that because the enumeration and discovery is genuinely the most satisfying part of this section. Let it surprise you.
+I will not say more than that because the enumeration and discovery is genuinely the most satisfying part of this section. Let it surprised you.
 
 ## Active Directory: The Segmentation Challenge
 I liked how the Actived directory had been segmented. The DC is not directly reachable from everywhere. The network is segmented and you can only get to the DC from specific hosts. That means your tunnelling game has to be on point.
@@ -36,7 +36,7 @@ I am a Ligolo-ng & chisel guy. It is just clean and I like how it works. But thi
 
 On the Active Directory side, the lab teaches you about some very specific concepts that I think every red teamer needs to understand deeply. Things around delegation the different types, how they work, why they exist, and more importantly how they can be abused. The lab also pushes you through coercion techniques, relay attacks, and Kerberos-specific attack chains. It brings a lot of things together in a way that makes sense in context rather than just reading about them in isolation.
 
-One honest thing I will say,  sometimes tools break for no apparent reason even when your methodology is correct. I spent multiple days on one part where I was convinced the path was right but something was not clicking. Turns out it was a tool version issue. 
+One honest thing I will say,sometimes tools break for no apparent reason even when your methodology is correct. I spent multiple days on one part where I was convinced the path was right but something was not clicking. Turns out it was a tool version issue. 
 
 ## Evasion
 This one is worth calling out separately. Defender is running on the victim machine and it will catch the standard stuff or signatured tools. Your usual executables will get flagged. You need to think creatively about how you execute things in memory, how you bypass AMSI, and how you achieve your objectives without putting anything on disk that does not need to be there.
@@ -44,15 +44,15 @@ This one is worth calling out separately. Defender is running on the victim mach
 
 
 ## The Not So Great Parts
-I try to be balanced so let me be honest about the rough edges.
 The lab has multiple players and at times it was noticeably sluggish. When you are in the middle of a timed attack chain like when you are working against something that resets every minute the lag is genuinely painful.
 
-Resets also require three votes from players which can be difficult to coordinate, especially in off-peak hours. I raised concerns in the Discord channel and while the community is helpful, the reset process could be smoother. The lab also picks up contamination from other players files left behind, changes other people made which can add confusion especially when you are trying to understand whether something you are seeing is part of the intended lab design or a leftover from someone else's session.
+
+Resets also require three votes from players which can be difficult to coordinate, especially in off-peak hours. I raised concerns in the Discord channel and while the community is helpful, the reset process could be smoother. The lab also picks up contamination from other players files left behind, changes other people made which can add confusion especially when you are trying to understand whether something you are seeing is part of the intended lab design or a leftover from someone else's session. I would recommmend it be reset atleast one in a month
 
 
 
 ## Should You Do CALIPENDULA?
-If you want to practice hybrid cloud and AD attack chains in a realistic environment, yes. The lab is well designed and the learning density is high. You will come out of it with better instincts around GCP enumeration, tunnelling in segmented networks, and Kerberos delegation abuse.
+If you want to practice hybrid cloud and AD attack chains in a realistic environment, yes. The lab is well designed and ahs good learning curve. You will come out of it with better instincts around GCP enumeration, tunnelling in segmented networks,and Kerberos delegation abuse.
 
 Go in prepared. Brush up on GCP IAM and service accounts before you start. Know your SOCKS tunnelling tools and have a backup plan if your preferred tool does not cooperate. And have patience some of it will take time to click.
 
