@@ -1035,6 +1035,60 @@ main { padding: 3rem 0; }
   border: 1px solid var(--border);
   margin: 1.5rem 0;
   clear: both;
+  cursor: zoom-in;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.article-content img:hover {
+  opacity: 0.9;
+  border-color: var(--green);
+}
+
+/* ===== IMAGE LIGHTBOX ===== */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 10, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.open { display: flex; }
+
+.lightbox-overlay img {
+  max-width: 95vw;
+  max-height: 92vh;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(0, 255, 65, 0.15);
+  cursor: default;
+  animation: lightboxIn 0.2s ease;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 1001;
+}
+
+.lightbox-close:hover { border-color: var(--green); color: var(--green); }
+
+@keyframes lightboxIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .article-content table {

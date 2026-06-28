@@ -65,6 +65,12 @@
     </div>
   </footer>
 
+  <!-- Image lightbox -->
+  <div class="lightbox-overlay" id="image-lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" title="Close (Esc)">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
   <!-- Search overlay -->
   <div class="search-overlay" id="search-overlay" onclick="if(event.target===this)closeSearch()">
     <div class="search-modal">
@@ -106,13 +112,36 @@
     document.getElementById('search-overlay').classList.remove('open');
   }
 
+  // ===== IMAGE LIGHTBOX =====
+  function openLightbox(src, alt) {
+    var img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt || '';
+    document.getElementById('image-lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('image-lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+  }
+
+  // Delegated so it keeps working after in-post search re-renders #article-text
+  document.addEventListener('click', function(e) {
+    if (e.target.matches && e.target.matches('#article-text img')) {
+      openLightbox(e.target.src, e.target.alt);
+    }
+  });
+
   // Ctrl+K shortcut
   document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
       e.preventDefault();
       openSearch();
     }
-    if (e.key === 'Escape') closeSearch();
+    if (e.key === 'Escape') {
+      closeSearch();
+      closeLightbox();
+    }
   });
 
   // Highlight matching text
