@@ -239,9 +239,11 @@ def build_post(md_path, section, all_posts, root=""):
       <div class="post-search-bar">
         <input type="text" id="post-search" placeholder="Search in this post..." autocomplete="off">
       </div>
-      {toc_html}
-      <div id="article-text">
-      {html_body}
+      <div class="article-body-wrap">
+        {toc_html}
+        <div id="article-text">
+        {html_body}
+        </div>
       </div>
     </article>
     """
@@ -253,7 +255,7 @@ def build_post(md_path, section, all_posts, root=""):
         description=meta.get("description", ""),
         root=root,
         content=article,
-        container_class="",
+        container_class="container-wide",
         **nav_active
     )
 

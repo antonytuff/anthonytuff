@@ -35,7 +35,7 @@ HTML smuggling sidesteps gateway inspection entirely by changing where the paylo
 
 
 ## Objectives
-So before we proceed, we will be aiming to achieve the following in this attack
+So before we proceed, we will be aiming to achieve the following in this attack<br>
 - Gain initial foothold into the target organization's network.<br>
 - Bypass the email security gateway without sending a file attachment<br>
 - Bypass SmartScreen and reduce friction at the point of execution on the endpoint<br>
