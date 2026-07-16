@@ -102,13 +102,13 @@ def get_tag_class(tag):
     return tag if tag in colored else ''
 
 
-def build_tag_html(tags_str):
-    """Build tag span HTML from comma-separated tags string."""
+def build_tag_html(tags_str, limit=5):
+    """Build tag span HTML from comma-separated tags string, limited to 5 tags."""
     if not tags_str:
         return ""
     html = ""
-    for tag in tags_str.split(","):
-        tag = tag.strip()
+    tags_list = [t.strip() for t in tags_str.split(",") if t.strip()]
+    for tag in tags_list[:limit]:
         cls = get_tag_class(tag)
         html += f'<span class="tag {cls}">{tag}</span>'
     return html
