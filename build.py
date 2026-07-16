@@ -306,7 +306,7 @@ def build_listing(posts, section, title, description):
     """Build a listing page for blog or writeups."""
     posts_sorted = sorted(posts, key=lambda p: p.get("date", ""), reverse=True)
 
-    search_html = build_search_filter_html(posts_sorted)
+    search_html = build_search_filter_html(posts_sorted, show_tag_filters=False)
 
     cards = []
     for p in posts_sorted:
