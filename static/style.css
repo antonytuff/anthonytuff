@@ -783,7 +783,7 @@ main { padding: 3rem 0; }
 
 .section-header h1 {
   font-family: 'Share Tech Mono', monospace;
-  color: var(--green);
+  color: #f43801;
   font-size: 1.3rem;
   font-weight: 400;
 }
@@ -851,7 +851,7 @@ main { padding: 3rem 0; }
 
 .post-card .meta .tag {
   background: rgba(0, 255, 65, 0.1);
-  color: var(--green-dim);
+  color: #f00707;
   padding: 0.1rem 0.5rem;
   font-size: 0.7rem;
   border: 1px solid rgba(0, 255, 65, 0.2);
@@ -872,7 +872,7 @@ main { padding: 3rem 0; }
 .post-card .meta .tag.reverse { color: #e91e63; background: rgba(233, 30, 99, 0.1); border-color: rgba(233, 30, 99, 0.2); }
 
 .post-card h2 {
-  color: var(--text);
+  color: #f80064;
   font-size: 1.05rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
@@ -942,14 +942,14 @@ main { padding: 3rem 0; }
 }
 
 .article-content h1 {
-  color: var(--green);
+  color: #f43801;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .article-content h2 {
-  color: var(--cyan);
+  color: #ff2108;
   font-size: 1.15rem;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
@@ -1146,7 +1146,7 @@ main { padding: 3rem 0; }
 }
 
 .resume-header h1 {
-  color: var(--green);
+  color: #f43801;
   font-size: 1.8rem;
   font-weight: 700;
   font-family: 'Share Tech Mono', monospace;
@@ -1911,7 +1911,7 @@ main { padding: 3rem 0; }
 
 .toc-title {
   font-family: 'Share Tech Mono', monospace;
-  color: var(--cyan);
+  color: #1c07ff;
   font-size: 0.85rem;
   margin-bottom: 0;
   padding-bottom: 0.5rem;
