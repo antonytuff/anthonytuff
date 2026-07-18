@@ -854,7 +854,7 @@ main { padding: 3rem 0; }
   color: #f00707;
   padding: 0.1rem 0.5rem;
   font-size: 0.7rem;
-  border: 1px solid rgba(0, 255, 65, 0.2);
+  border: 1px solid rgb(204 70 3 / 20%);
 }
 
 .post-card .meta .tag.htb { color: var(--cyan); background: rgba(0, 212, 255, 0.1); border-color: rgba(0, 212, 255, 0.2); }
@@ -958,7 +958,7 @@ main { padding: 3rem 0; }
 }
 
 .article-content h3 {
-  color: var(--green-dim);
+  color: #ff2108;
   font-size: 1rem;
   margin-top: 2rem;
   margin-bottom: 0.8rem;
@@ -1966,7 +1966,7 @@ main { padding: 3rem 0; }
 }
 
 .toc-link {
-  color: var(--text-dim);
+  color: #f43801;
   text-decoration: none;
   font-size: 0.8rem;
   padding: 0.3rem 0;
@@ -1976,14 +1976,14 @@ main { padding: 3rem 0; }
 }
 
 .toc-link:hover {
-  color: var(--green);
-  border-left-color: var(--green);
+  color: #f43801;
+  border-left-color: #f43801;
 }
 
 .toc-link.toc-active {
-  color: var(--green);
-  border-left-color: var(--green);
-  background: rgba(0, 255, 65, 0.03);
+  color: #f43801;
+  border-left-color: #f43801;
+  background: rgba(244, 56, 1, 0.03);
 }
 
 .toc-h1 { padding-left: 0.4rem; font-weight: 500; }
