@@ -850,7 +850,7 @@ main { padding: 3rem 0; }
 .post-card .meta .date::after { content: ']'; }
 
 .post-card .meta .tag {
-  background: rgba(0, 255, 65, 0.1);
+  background: #ffc6001a;
   color: #f00707;
   padding: 0.1rem 0.5rem;
   font-size: 0.7rem;
@@ -872,7 +872,7 @@ main { padding: 3rem 0; }
 .post-card .meta .tag.reverse { color: #e91e63; background: rgba(233, 30, 99, 0.1); border-color: rgba(233, 30, 99, 0.2); }
 
 .post-card h2 {
-  color: #f80064;
+  color: #f86200;
   font-size: 1.05rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
