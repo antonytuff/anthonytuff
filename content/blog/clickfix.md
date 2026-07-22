@@ -1,12 +1,12 @@
 ---
 title: "How attackers abuse Clickfix for intial Access"
-date: 2026-07-022
+date: 2026-07-22
 tags: Click Fix,Social Engineering,Payload Delivery, Phishing
 description: In this post, we will go through how to set up ClickFix and see how attackers leverage it for delivering payloads.
 
 
 ---
-I was doing some security research and wanted to generate some POC for **ClickFix**, its actually one of the most prevalent social engineering tactics that is actively used by APTs for initial access and malware delivery.
+I was doing some security research and wanted to develop some POC for **ClickFix**, its actually one of the most prevalent social engineering tactics that is actively used by APTs for initial access and malware delivery.
 
 I also wanted to add it in my arsenal of social engineering type of assessments when conducting authorized engagements for professional engagements. 
 ClickFix is a vulnerability technique first documented by Mdox, and it has since spawned several variants (FileFix being one notable example).Its an simple and effective technique that combines  psychological manipulation and user behaviors by targeting human behavior instead. 
@@ -14,7 +14,7 @@ ClickFix is a vulnerability technique first documented by Mdox, and it has since
 In this post, I will walk through the complete infection chain, demonstrate how attackers chain it to deliver payloads, and show how adversaries use to perform  in-memory execution to evade security solutions like Microsoft Defender.
 I will be using Adaptix C2 as my command and control framework, with PowerShell as the delivery mechanism.
 
-**Note:** I won't be focusing extensively on evasion techniques in this post, as I've covered those in detail in previous blog posts.
+**Note:** I won't be focusing extensively on evasion techniques, as I've covered those in detail in previous articles.
 
 ## What is ClickFix?
 ClickFix is a social engineering technique that leverages fake security warnings to trick users into executing attacker-controlled commands.  So essentialy you become the one who is clickickng and executing the malicious links or as an attacker’s accomplice without even realizing it.The attack typically works by:
@@ -27,26 +27,26 @@ ClickFix is a social engineering technique that leverages fake security warnings
 The beauty of this attack from an adversary's perspective is that it doesn't require zero-days or complex exploit chain, it simply needs social engineering and some user interactions.
 
 ## Attack Flow
-The diagram below illustrate the click fix attack flow,
+The diagram below illustrate the click fix attack flow,that we will setup
 ![](../static/img/Clickfix/Pasted%20image%2020260722130309.png)
 
 ## The Infection Chain: Step-by-Step Breakdown
 ### Step 1: Initial Redirect
-The victim lands on a malicious entry point through one of several vectors it could be through;
-- **Compromised websites** (legitimate sites with injected malicious scripts, mostly I have used through compromised wordpress plugins)
-- **Malicious advertisements/SEO Poisoning** (ads on legitimate platforms redirecting to attack controlled website)
-- **Cracked software/keygen pages** (notorious for hosting malware distribution)
-- **Phishing links** (sent via email, SMS, or social media or even when conducting professional phishing campaigns)
-- **Fake download portals** (impersonating legitimate software distribution sites)
+The victim lands on a malicious entry point through one of several vectors it could be through;<br><br>
+- **Compromised websites** (legitimate sites with injected malicious scripts, mostly I have used through compromised wordpress plugins)<br>
+- **Malicious advertisements/SEO Poisoning** (ads on legitimate platforms redirecting to attack controlled website)<br>
+- **Cracked software/keygen pages** (notorious for hosting malware distribution)<br>
+- **Phishing links** (sent via email, SMS, or social media or even when conducting professional phishing campaigns)<br>
+- **Fake download portals** (impersonating legitimate software distribution sites)<br>
 
-For our demo, I will just demonstrate the landing page,just for reference purposes I found a pretty good website which tracks all websites that are currently affected by clickfix kind attack,[https://clickfix.carsonww.com]([https://clickfix.carsonww.com)
+For our demo, I will just demonstrate the landing page,just for reference purposes I found a pretty good website which tracks all websites that are currently affected by clickfix attack,[https://clickfix.carsonww.com]([https://clickfix.carsonww.com), you can use it for inspiration
 
 ### Step 2: Fake Verification Screen
-Once the users are redirected or land to the page, the victim will see a **convincing fake security warning** that mimics legitimate services. Most of the common examples that have been abused include:
-- **Fake Cloudflare verification screens** (most common variant, since most website run behind cloudflare, so it's easy to tryst)
-- **Windows Defender alerts** (fake system notifications- requires a lot of effort to set the page)
-- **Browser security warnings** (faked browser dialogs)
-- **Antivirus vendor screens** (Norton, McAfee, Kaspersky, etc.), hard to setup and you require to know victim security solution
+Once the users are redirected or land to the page, the victim will see a **convincing fake security warning** that mimics legitimate services. Most of the common examples that have been abused include:<br><br>
+- **Fake Cloudflare verification screens** (most common variant, since most website run behind cloudflare, so it's easy to trust)<br>
+- **Windows Defender alerts** (fake system notifications- requires a lot of effort to set the page)<br>
+- **Browser security warnings** (faked browser dialogs)<br>
+- **Antivirus vendor screens** (Norton, McAfee, Kaspersky, etc.), hard to setup and you require to know victim security solution<br>
 
 Below are sample of fake Cloudflare pages, I have setup in my own local environment
 ![](../static/img/Clickfix/Pasted%20image%2020260715182707.png)
