@@ -967,9 +967,9 @@ main { padding: 3rem 0; }
 .article-content p { margin-bottom: 1rem; }
 
 .article-content a {
-  color: var(--cyan);
+  color: #81691d;
   text-decoration: none;
-  border-bottom: 1px dashed var(--cyan);
+  border-bottom: 1px dashed #81691d;
 }
 
 .article-content a:hover {
