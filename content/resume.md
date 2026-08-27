@@ -6,7 +6,7 @@ cv_download: static/Anthony Mabi Wanjiku Resume.pdf
 
 ## whoami
 
-Cybersecurity Engineer with over 7 years of hands-on experience designing, assessing, and improving security controls across enterprise and corporate environments. Specialized in offensive security, red teaming, and penetration testing with a growing focus on DevSecOps, cloud security, security automation, and AI-driven security solutions.
+Cybersecurity Engineer with over 7 years of hands-on experience designing, assessing, and improving security controls across enterprise and corporate environments. Specialized in offensive security, red teaming, and cloud security with a growing focus on DevSecOps, cloud security, security automation, and AI-driven security solutions.
 
 Successfully delivered 200+ cybersecurity engagements spanning vulnerability assessments, penetration tests, configuration reviews, and risk audits across on-premises, cloud, and hybrid infrastructures. Experienced in embedding security into CI/CD pipelines, hardening cloud environment, and building automated security tooling to scale assessment workflows.
 
@@ -14,12 +14,11 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 ## skills
 
-- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Active Directory Exploitation, Social Engineering, Adversary Emulation
-- **Web & API Security**: App Sec, API Security Assessment,CI/CD Security, Pipeline Security, Testing
+- **Offensive Security**: Red Teaming, Penetration Testing, Active Directory Exploitation,Adversary Emulation
+- **Web & API Security**: App Sec, API Security Assessment,CI/CD Security, Pipeline Security,SAST, DAST
 - **Securty Research**: Intial Access Techniques, Evasion,Social Engineering,Vulnerability Research
-- **Cloud Security**:Cloud Misconfiguration Reviews, Docker Security, Kubernetes Security, Container Image Scanning, and Cloud Network Security
-- **DevSecOps**: CI/CD Security,Container Security,SAST, DAST, and SCA Testing
-
+- **Cloud Security**:Misconfiguration Reviews, Docker Security, Kubernetes Security, and Cloud Network Security
+]
 ## certifications
 
 - CEH v10 (Certified Ethical Hacker) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=4Eofj5MDBWladzSSHB/NeEFQpBKZ1i//S4bMTPfwfwo=

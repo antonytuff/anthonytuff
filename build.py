@@ -489,7 +489,7 @@ def build_resume():
             ('csa', ('CSA', 'EC-Council', 'csa', 'static/badge-csa.jpg')),
             ('mcrta', ('MCRTA', 'Cyberwarfare Labs', 'mcrta', 'static/badge-mcrta.png')),
             ('mail service', ('MAIL', 'Extreme Red Team Laboratories', 'mail', 'static/badge-extreme-mail.png')),
-            ('HTB', ('HTB', 'Hack The Box', 'htb', 'static/ic-dante.svg')),
+            ('htb', ('HTB', 'Hack The Box', 'htb', 'static/ic-dante.svg')),
             ('iso 22301', ('CLI', 'Datasec', 'cli', '')),
             ('cscu', ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png')),
             ('cei', ('CEI', 'EC-Council', 'cei', 'static/badge-cei.png')),

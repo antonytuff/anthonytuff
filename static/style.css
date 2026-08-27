@@ -170,6 +170,10 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* Keeps the bar (and the nav panel inside it) above the mobile scrim,
+     which is painted inside the header's stacking context. */
+  position: relative;
+  z-index: 2;
 }
 
 .logo {
@@ -240,6 +244,57 @@ nav a.active::after {
   height: 2px;
   background: var(--green);
   box-shadow: 0 0 6px var(--green-glow);
+}
+
+/* ===== MOBILE NAV TOGGLE ===== */
+.nav-toggle {
+  display: none;          /* switched on at the mobile breakpoint */
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.nav-toggle:hover,
+body.nav-open .nav-toggle {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.nav-toggle-bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+body.nav-open .nav-toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+body.nav-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+body.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* Starts below the bar: a full-viewport scrim would tint the translucent
+   header itself and make it read as disabled. */
+.nav-scrim {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s;
+  z-index: 1;
 }
 
 /* ===== GLOBAL SEARCH ===== */
@@ -1114,6 +1169,11 @@ main { padding: 3rem 0; }
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
+  /* Wraps to several lines on a phone — without this the tags run together. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
 }
 
 /* ===== RESUME PAGE ===== */
@@ -1900,12 +1960,19 @@ main { padding: 3rem 0; }
   .article-body-wrap {
     flex-direction: column;
     gap: 0;
+    /* Cross axis is now horizontal: flex-start would shrink-wrap the text
+       column to its max-content width and blow past the viewport. */
+    align-items: stretch;
   }
   .article-body-wrap .toc {
     position: static;
     flex-basis: auto;
     width: 100%;
     margin-bottom: 2rem;
+  }
+  .article-body-wrap #article-text {
+    max-width: 100%;
+    width: 100%;
   }
 }
 
@@ -2434,30 +2501,175 @@ footer a {
 
 /* ===== RESPONSIVE ===== */
 
-/* Medium screens */
-@media (max-width: 900px) {
-  .article-content { max-width: 100%; }
+/* Nothing may size itself past the viewport. */
+img, svg, video, canvas, iframe, table { max-width: 100%; }
+
+/* Long URLs and tokens are common in the writeups — never let one push
+   the whole page sideways. */
+.article-content, .post-card, .cert-card, .contact-card {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-/* Small screens: single column, TOC collapses inline */
+/* Wide tables scroll inside their own box rather than the page. */
+.article-content table { display: block; overflow-x: auto; max-width: 100%; }
+
+/* --- Tablet: 901px and below --- */
+@media (max-width: 900px) {
+  .article-content { max-width: 100%; }
+  .container { padding: 0 1.5rem; }
+  /* Tighten the bar so all six links still fit an iPad in portrait.
+     The logo subtitle is the widest part of the logo block, so it has to
+     shrink too or it alone pushes the nav off-screen. */
+  nav a { margin-left: 0.9rem; font-size: 0.72rem; }
+  .logo { font-size: 1.25rem; }
+  .logo-subtitle { font-size: 0.55rem; letter-spacing: 1px; }
+  main { padding: 2.25rem 0; }
+  .cert-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Below tablet portrait: the nav collapses into a drawer --- */
+@media (max-width: 760px) {
+  .nav-toggle { display: inline-flex; }
+
+  header .container {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .nav-group { gap: 0.35rem; }
+
+  /* The link list becomes a full-width panel under the header bar. */
+  nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.4rem 1rem 0.9rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 99;
+    max-height: calc(100vh - 100%);
+    overflow-y: auto;
+  }
+
+  body.nav-open nav {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  nav a {
+    margin-left: 0;
+    padding: 0.85rem 0.4rem;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  nav a:last-child { border-bottom: none; }
+
+  /* The desktop underline is positioned for a horizontal bar. */
+  nav a.active::after {
+    bottom: auto;
+    top: 50%;
+    left: auto;
+    right: 0.4rem;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  body.nav-open .nav-scrim {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  body.nav-open { overflow: hidden; }
+}
+
+/* --- Phones --- */
 @media (max-width: 700px) {
   .container { padding: 0 1rem; }
-  header .container { flex-direction: column; gap: 0.8rem; }
-  .nav-group { width: 100%; justify-content: center; }
-  nav a { margin-left: 1rem; font-size: 0.75rem; }
-  .ascii-banner { font-size: 0.32rem; }
-  .about-section .about-stats { grid-template-columns: repeat(2, 1fr); }
-  .hero .links { gap: 0.5rem; }
-  .hero .links a { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .post-layout { grid-template-columns: 1fr; }
+  main { padding: 2rem 0; }
+
+  /* 71 characters wide: scale it to the viewport so it always fits. */
+  .ascii-banner { font-size: min(2vw, 0.55rem); }
+
+  .hero { padding: 1.25rem 0 2rem; }
+  .hero .links { gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+  .hero .links a { padding: 0.6rem 1rem; font-size: 0.8rem; min-height: 44px; display: inline-flex; align-items: center; }
+
+  .about-section .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* minmax(0,…) + min-width:0 — a plain 1fr track still refuses to shrink
+     below its content's min-content width (form inputs, terminal chrome). */
+  .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .post-layout { grid-template-columns: minmax(0, 1fr); }
+  .contact-grid > *, .post-layout > * { min-width: 0; }
+  .contact-form input, .contact-form textarea, .contact-form select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
   .sidebar { position: static; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
   .resume-header { flex-direction: column; }
-  .skill-grid { grid-template-columns: 1fr; gap: 0.75rem; }
-  .skill-card { padding: 0.85rem 0.95rem 0.85rem; }
-  .skill-chip { font-size: 0.7rem; padding: 2px 7px; }
+  .skill-grid { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+  .skill-card { padding: 0.85rem 0.95rem 0.85rem; min-width: 0; }
   .badge-grid { gap: 0.5rem; }
-  .badge { padding: 0.4rem 0.7rem; font-size: 0.75rem; }
+  .badge { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+
+  /* Readability floor — nothing body-like below 12px on a phone. */
+  .skill-chip { font-size: 0.78rem; padding: 3px 8px; }
+  .tag, .post-card .meta .tag, .tag-filter { font-size: 0.78rem; }
+  .toc-link { font-size: 0.85rem; padding: 0.45rem 0; }
+  .toc-h3, .toc-h4 { font-size: 0.8rem; }
+  .logo-subtitle { font-size: 0.72rem; letter-spacing: 1px; }
+  footer p, .footer-content p { font-size: 0.8rem; }
+  .terminal-title { font-size: 0.78rem; }
+  .read-time { font-size: 0.8rem; }
+
+  /* Comfortable touch targets. */
+  .social-icons a, .hero-socials a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .page-btn { min-height: 40px; padding: 0.5rem 0.8rem; }
+  .back-link, .cert-verify-link, .tag-filter {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+  .tag-filter { padding: 0.4rem 0.8rem; }
+
+  /* Code keeps its own horizontal scroll instead of widening the page. */
+  .article-content pre, .article-content .codehilite { max-width: 100%; }
+  .article-content .codehilite pre { padding: 0.9rem; font-size: 0.8rem; }
+  .article-content pre { padding: 0.9rem; font-size: 0.8rem; }
+
+  .search-modal { max-width: 94vw; }
+}
+
+/* --- Small phones --- */
+@media (max-width: 400px) {
+  .logo { font-size: 1.05rem; }
+  /* A nowrap chip like "Container Image Scanning" is wider than the card here. */
+  .skill-chip { white-space: normal; }
+  .about-section .about-stats { grid-template-columns: 1fr; }
+  .hero .links a { padding: 0.55rem 0.85rem; }
+  .cert-card { flex-direction: column; }
+  .cert-icon-wrap { align-self: flex-start; }
 }
 
 /* ===== SYNTAX HIGHLIGHTING (Pygments Monokai) ===== */
