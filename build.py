@@ -489,7 +489,7 @@ def build_resume():
             ('csa', ('CSA', 'EC-Council', 'csa', 'static/badge-csa.jpg')),
             ('mcrta', ('MCRTA', 'Cyberwarfare Labs', 'mcrta', 'static/badge-mcrta.png')),
             ('mail service', ('MAIL', 'Extreme Red Team Laboratories', 'mail', 'static/badge-extreme-mail.png')),
-            ('cnss', ('CNSS', 'ICSI, UK', 'cnss', 'static/badge-cnss.jpg')),
+            ('HTB', ('HTB', 'Hack The Box', 'htb', 'static/ic-dante.svg')),
             ('iso 22301', ('CLI', 'Datasec', 'cli', '')),
             ('cscu', ('CSCU', 'EC-Council', 'cscu', 'static/badge-cscu.png')),
             ('cei', ('CEI', 'EC-Council', 'cei', 'static/badge-cei.png')),
@@ -741,7 +741,7 @@ def build_index(blog_posts, writeup_posts):
     </div>
 
     <div class="about-section reveal">
-      <p>Cybersecurity Engineer with 7+ years of experience across offensive security, DevSecOps, cloud security, and security automation. Specialized in red teaming, penetration testing, and building automated security tooling — with a growing focus on AI-driven security solutions and LLM security research. 200+ engagements delivered across enterprise, government, and financial sectors.</p>
+      <p>Cybersecurity Engineer with 7+ years of experience across offensive security, DevSecOps, cloud security, and security automation. Specialized in red teaming,intiala access, and building automated security tooling - with a growing focus on AI-driven security solutions and LLM security research. 200+ engagements delivered across enterprise, government, and financial sectors.</p>
       <div class="about-stats">
         <div class="stat-box">
           <span class="stat-num">{len(writeup_posts)}</span>

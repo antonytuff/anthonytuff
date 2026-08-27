@@ -1,6 +1,6 @@
 ---
 title: Resume
-description: Cybersecurity Engineer & Senior Security Consultant
+description: Cybersecurity Engineer &  Red Teamer
 cv_download: static/Anthony Mabi Wanjiku Resume.pdf
 ---
 
@@ -8,22 +8,17 @@ cv_download: static/Anthony Mabi Wanjiku Resume.pdf
 
 Cybersecurity Engineer with over 7 years of hands-on experience designing, assessing, and improving security controls across enterprise and corporate environments. Specialized in offensive security, red teaming, and penetration testing with a growing focus on DevSecOps, cloud security, security automation, and AI-driven security solutions.
 
-Successfully delivered 200+ cybersecurity engagements spanning vulnerability assessments, penetration tests, configuration reviews, and risk audits across on-premises, cloud, and hybrid infrastructures. Experienced in embedding security into CI/CD pipelines, hardening cloud environments (AWS, Azure, GCP), and building automated security tooling to scale assessment workflows.
+Successfully delivered 200+ cybersecurity engagements spanning vulnerability assessments, penetration tests, configuration reviews, and risk audits across on-premises, cloud, and hybrid infrastructures. Experienced in embedding security into CI/CD pipelines, hardening cloud environment, and building automated security tooling to scale assessment workflows.
 
 Passionate about leveraging AI and machine learning to advance offensive and defensive security from autonomous pentesting tools to intelligent threat detection. Actively researching AI red teaming, LLM security risks, and the intersection of generative AI with adversarial tradecraft. Committed to continuous learning, mentorship, and translating complex technical findings into clear, actionable risk insights for executive stakeholders.
 
 ## skills
 
-- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Active Directory Exploitation, Social Engineering
-- **Web & API Security**: OWASP Top 10, Burp Suite, API Security Assessment, REST/GraphQL Testing, DAST/SAST, Source Code Review
-- **Network Security**: Nmap, Wireshark, Metasploit, Nexpose, Nessus, Network Exploitation
-- **Cloud Security**: AWS, Azure, GCP, Docker, Kubernetes, ScoutSuite, Pacu
-- **Mobile Security**: Android/iOS Pentesting (OWASP MSTG), APK Reverse Engineering
-- **DevSecOps**: CI/CD Security, Semgrep, SonarCube, Container Security, Jenkins
-- **Programming**: Python, Bash, PowerShell, JavaScript, Go, Laravel
-- **DFIR**: Malware Analysis, Incident Response, Digital Forensics, SecurityOnion
-- **Frameworks**: NIST, ISO 27001, GDPR, COBIT, MITRE ATT&CK, CIS Controls, Zero Trust
-- **Tools**: Cobalt Strike, BurpSuite, Metasploit, ElasticSearch, Postman, AlienVault
+- **Offensive Security**: Red Teaming, Penetration Testing, Cyber Attack Simulation, Active Directory Exploitation, Social Engineering, Adversary Emulation
+- **Web & API Security**: App Sec, API Security Assessment,CI/CD Security, Pipeline Security, Testing
+- **Securty Research**: Intial Access Techniques, Evasion,Social Engineering,Vulnerability Research
+- **Cloud Security**:Cloud Misconfiguration Reviews, Docker Security, Kubernetes Security, Container Image Scanning, and Cloud Network Security
+- **DevSecOps**: CI/CD Security,Container Security,SAST, DAST, and SCA Testing
 
 ## certifications
 
@@ -36,7 +31,7 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 - CSA (Certified SOC Analyst) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=6GtvaQdY0D8klMbqkhjurSFr1Hu5KPTzXwguosGs1ts=
 - MCRTA (Certified Multi-Cloud Red Team Analyst) - Cyberwarfare Labs | https://labs.cyberwarfare.live/credential/achievement/6a2838a5502eca7663165f78
 - Mail Service (Extreme Red Team) - Extreme Red Team Laboratories | https://credsverse.com/credentials/c99f9366-d39a-41e6-8fd9-c1306a101f57?preview=1
-- CNSS (Certified Network Security Specialist) - ICSI, UK | https://www.credential.net/48010407-4e1d-4fe1-8965-2c44c10ae0cc#acc.EztcQRgp
+- HTB Date & Rasta Labs - HacktheBox | https://www.hackthebox.com/
 - CLI (Certified Lead Implementer ISO 22301) - Datasec | https://www.credly.com/verify/XXXXX
 - CSCU v2 (Certified Secure Computer User) - EC-Council | https://aspen.eccouncil.org/VerifyBadge?type=certification&a=1jz1YiEAHDByILjxjY6Y8NLFHW/WN9RBi440e9IJt94=
 - CEI (Certified EC-Council Instructor) - EC-Council | https://aspen.eccouncil.org/verify/XXXXX
@@ -84,11 +79,6 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 - Configured zone records and installed SSL certificates on client websites
 - Developed custom functions and templates with Laravel, JavaScript, HTML, CSS, and Bootstrap 4, integrated with WordPress
 
-## achievements
-
-- Completed 200+ cybersecurity projects across diverse sectors
-- HackTheBox Hacker rank
-- Active security researcher and blogger at sploitony.com
 
 ## education
 
@@ -100,4 +90,4 @@ Passionate about leveraging AI and machine learning to advance offensive and def
 
 - GitHub: [antonytuff](https://github.com/antonytuff)
 - LinkedIn: [anthony-mabi](https://linkedin.com/in/anthony-mabi-9bb18b174)
-- Email: inert.fingers-0m@icloud.com
+- Email: antonymabi@gmail.com
