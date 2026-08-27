@@ -215,12 +215,14 @@ header .container {
   gap: 0.5rem;
 }
 
-nav {
+/* Scoped to the header: the table of contents is a <nav> too, and picks up
+   anything declared on a bare `nav` selector. */
+header nav {
   display: flex;
   align-items: center;
 }
 
-nav a {
+header nav a {
   color: var(--text-dim);
   text-decoration: none;
   margin-left: 1.5rem;
@@ -231,12 +233,12 @@ nav a {
   position: relative;
 }
 
-nav a:hover, nav a.active {
+header nav a:hover, header nav a.active {
   color: var(--green);
   text-shadow: 0 0 8px var(--green-glow);
 }
 
-nav a.active::after {
+header nav a.active::after {
   content: '';
   position: absolute;
   bottom: -0.5rem;
@@ -2521,7 +2523,7 @@ img, svg, video, canvas, iframe, table { max-width: 100%; }
   /* Tighten the bar so all six links still fit an iPad in portrait.
      The logo subtitle is the widest part of the logo block, so it has to
      shrink too or it alone pushes the nav off-screen. */
-  nav a { margin-left: 0.9rem; font-size: 0.72rem; }
+  #site-nav a { margin-left: 0.9rem; font-size: 0.72rem; }
   .logo { font-size: 1.25rem; }
   .logo-subtitle { font-size: 0.55rem; letter-spacing: 1px; }
   main { padding: 2.25rem 0; }
@@ -2540,8 +2542,9 @@ img, svg, video, canvas, iframe, table { max-width: 100%; }
 
   .nav-group { gap: 0.35rem; }
 
-  /* The link list becomes a full-width panel under the header bar. */
-  nav {
+  /* The link list becomes a full-width panel under the header bar.
+     Must stay scoped to #site-nav — a bare `nav` also hits .toc-nav. */
+  #site-nav {
     position: absolute;
     top: 100%;
     left: 0;
@@ -2563,14 +2566,14 @@ img, svg, video, canvas, iframe, table { max-width: 100%; }
     overflow-y: auto;
   }
 
-  body.nav-open nav {
+  body.nav-open #site-nav {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
   }
 
-  nav a {
+  #site-nav a {
     margin-left: 0;
     padding: 0.85rem 0.4rem;
     font-size: 0.85rem;
@@ -2580,10 +2583,10 @@ img, svg, video, canvas, iframe, table { max-width: 100%; }
     align-items: center;
   }
 
-  nav a:last-child { border-bottom: none; }
+  #site-nav a:last-child { border-bottom: none; }
 
   /* The desktop underline is positioned for a horizontal bar. */
-  nav a.active::after {
+  #site-nav a.active::after {
     bottom: auto;
     top: 50%;
     left: auto;
@@ -2636,7 +2639,9 @@ img, svg, video, canvas, iframe, table { max-width: 100%; }
   /* Readability floor — nothing body-like below 12px on a phone. */
   .skill-chip { font-size: 0.78rem; padding: 3px 8px; }
   .tag, .post-card .meta .tag, .tag-filter { font-size: 0.78rem; }
-  .toc-link { font-size: 0.85rem; padding: 0.45rem 0; }
+  /* Not the padding shorthand — it would reset the padding-left that gives
+     .toc-h1/h2/h3 their nesting indent. */
+  .toc-link { font-size: 0.85rem; padding-top: 0.45rem; padding-bottom: 0.45rem; }
   .toc-h3, .toc-h4 { font-size: 0.8rem; }
   .logo-subtitle { font-size: 0.72rem; letter-spacing: 1px; }
   footer p, .footer-content p { font-size: 0.8rem; }
